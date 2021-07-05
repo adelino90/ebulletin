@@ -1,0 +1,80 @@
+ 
+
+					<div class="row">
+						<div class ="col-md-6 col-md-offset-3 post_container">
+							<div class="row">
+										<div class ="col-md-12">
+											<div class="form-group">
+													<label for="focusedInput">Title</label>
+													<input class="form-control" id="t_title" type="text" value ="{{title}}">
+											</div>
+										</div>
+							</div>
+
+							<div class="row">
+										<div class ="col-md-12">
+											<div class="form-group">
+													<label for="focusedInput">Subject</label>
+													<input class="form-control" id="s_subject" type="text" value = "{{subject}}">
+											</div>
+									</div>
+							</div>
+
+							<div class="row">
+										<div class ="col-md-12">					
+												<div class="form-group">
+														<label for="focusedInput">File</label>
+													<img id="img_post_image" src="../upload/{{filename}}" class="img-rounded" alt="Cinque Terre">
+													 <button type="button" class="modal__btn" id="toggle-btn"
+  														data-toggle="collapse" data-target="#toggle-example">Upload New File</button>
+													<div id="toggle-example" class="collapse out">
+													<input class="form-control" id="f_file" type="file" value ="../upload/{{filename}}">
+												 	</div>	
+												</div>
+									</div>
+							</div>
+
+							<div class="row">
+										<div class ="col-md-12">	
+												<div class="form-group">
+													<label for="comment">Description:</label>
+													<textarea class="form-control" rows="5" id="description">{{description}}</textarea>
+												</div>
+										</div>
+							</div>
+
+							<div class="row">
+										<div class ="col-md-12">
+											<div class="form-group">
+												<div class="row">
+													<div class="col-md-12">
+														<label for="comment">Posting Date:</label>
+													</div>
+													<div class="col-md-5">
+														<input class="form-control" id="posting_date_from" placeholder="From" value ="{{posting_date_from}}"  type="text">
+													</div>
+													<div class="col-md-5">
+														<input class="form-control" id="posting_date_to" placeholder="To"  value ="{{posting_date_to}}"  type="text">
+													</div>
+												</div>
+											</div>
+					 					</div>
+							</div>
+							<div class="row">
+										<div class ="col-md-12">
+
+											{{#if (eq status)}}
+													
+													<button type="button" class="modal__btn" data-id="{{id}}" id = "Cancel">Cancel</button>	
+												   
+											{{else}}	
+													<button type="button" class="modal__btn" data-id="{{id}}" id = "Save">Save</button>
+													<button type="button" class="modal__btn" data-id="{{id}}" id = "Cancel">Cancel</button>	
+											{{/if}}	
+											
+										</div>
+							</div>
+					</div>
+                
+				</div>	
+

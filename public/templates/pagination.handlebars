@@ -1,0 +1,22 @@
+<div class="pagination-wrapper">
+      {{#pagination currentPage pageCount size}}
+    <div class="pagination">
+      {{#unless startFromFirstPage}}
+     <a class="prev page-numbers" href="javascript:;">prev</a>
+      {{/unless}}
+
+      {{#each pages}}
+        {{#if isCurrent}}
+          <span aria-current="page" class="page-numbers current" data-id="{{page}}">{{page}}</span>
+        {{/if}}
+        {{#unless isCurrent}}
+          <a class="page-numbers"  href="javascript:;" data-id="{{page}}">{{page}}</a>
+        {{/unless}}
+      {{/each}}
+
+      {{#unless endAtLastPage}}
+       <a class="next page-numbers" href="javascript:;">next</a>
+      {{/unless}}
+    </div>
+    {{/pagination}}
+</div>

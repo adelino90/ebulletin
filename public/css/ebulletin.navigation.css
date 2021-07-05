@@ -1,0 +1,21 @@
+.ebulletin_login_modal_header{
+  text-align: center;
+  height: 3em;
+}
+.ebulletin-navigtion,.ebulletin-content{
+  padding: 0;
+}
+.ebulletin-nav-list > li > a{
+  -webkit-user-select: none;  /* Chrome all / Safari all */
+  -moz-user-select: none;     /* Firefox all */
+  -ms-user-select: none;      /* IE 10+ */
+	
+}
+.ebulletin-nav-menu,.ebulletin-dropdown-li{
+cursor:pointer;
+}
+
+.ebulletin-nav-right-list{
+	padding-top:5px;
+	padding-right:5px;
+}

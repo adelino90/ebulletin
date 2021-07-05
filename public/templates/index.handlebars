@@ -1,0 +1,38 @@
+ <div class = "col-md-9">
+	 <div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+     {{#each bulletin_data}}
+        <li data-target="#myCarousel" data-slide-to="{{@index}}"></li>
+    {{/each}}
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner" role="listbox">
+
+      {{#each bulletin_data}}
+                <div class="item {{#ifCond @index 0}}active{{/ifCond}}">
+                  <img src="../upload/{{Files}}" alt="{{subject}}" width="760" height="345">
+                  <div class="carousel-caption">
+                    <h3>{{subject}}</h3>
+                    <p>{{description}}</p>
+                  </div>
+                </div>
+      {{/each}}
+
+  
+    </div>
+
+    <!-- Left and right controls -->
+    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+      
+
+        </div>

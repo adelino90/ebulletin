@@ -1,0 +1,51 @@
+
+				<div class="col-md-12 ebulletin-post_request-content">
+					<div class="row">
+						<div class="col-md-12 ebulletin-post_request-options">
+							<div class="row">
+								<div class="ebulletin-post_request-options-left">
+									<h4>User Management</h4>
+								</div>
+								<div class="ebulletin-post_request-options-right">
+									<button type="button" class="btn btn-success" data-toggle="modal" id ="ebulletin-user-add-btn">Add User</button>
+								</div>
+							</div>
+					
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12 ebulletin-post_request-list">
+							<div class="col-md-12 ">
+								<h4>Users</h4>
+							</div>
+							<div class = "row">
+								<div class="col-md-12">
+								<table class="table ebulletin-post_request-table">
+									<thead>
+									  <tr>
+										<th>Type</th>
+                                        <th>Username</th>
+										<th>Name</th>
+										<th>Action</th>
+									  </tr>
+									</thead>
+									<tbody>
+										   <!-- Data Here -->
+											  {{#each user_data}}
+													<tr>
+															<td>{{type}}</td>
+															<td>{{username}}</td>
+															<td>{{whole_name}}</td>
+															<td class="ebulletin-post_request_action" data-id = "{{id}}"><i class="fa fa-pencil-square-o ebulletin-dashboard-edit" data-id={{id}}></i>&nbsp;<i class="fa fa-trash ebulletin-dashboard-delete" data-id={{id}}></i></td>
+													</tr>
+												{{/each}}
+												<!-- data -->
+									</tbody>
+								  </table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+		

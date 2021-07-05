@@ -1,0 +1,98 @@
+
+				<div class="col-md-12 ebulletin-dashboard-content">
+					<div class="row">
+						<div class="col-md-12 ebulletin-dashboard-options">
+							<div class="row">
+								<div class="ebulletin-dashboard-options-left">
+									<h4>Welcome To Your Dashboard</h4>
+								</div>
+								<div class="ebulletin-dashboard-options-right">
+									<button type="button" class="btn btn-success" data-toggle="modal" data-target="#ebulletin-add-post-container">Add Post</button>
+								</div>
+							</div>
+					
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12 ebulletin-dashboard-list">
+							<div class="col-md-12 ">
+								<h4>Posts</h4>
+							</div>
+							<div class = "row">
+								<div class="col-md-12">
+								<table class="table ebulletin-dashboard-table">
+									<thead>
+									  <tr>
+										<th>Title</th>
+										<th>Status</th>
+										<th>Date Submitted</th>
+										<th>Action</th>
+									  </tr>
+									</thead>
+									<tbody>
+										 {{#each dashboard_data}}
+												<tr>
+														<td class="post_title">{{title}}</td>
+														<td><span class="{{stat}}">{{stat}}</span></td>
+														<td>{{date_submited}}</td>
+														<td><i class="fa fa-pencil-square-o ebulletin-dashboard-edit" data-id={{id}}></i>&nbsp;<i class="fa fa-trash ebulletin-dashboard-delete" data-id={{id}}></i></td>
+												</tr>
+										{{/each}}
+									</tbody>
+								  </table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+		
+		<!-- Modal -->
+			<div id="ebulletin-add-post-container" class="modal fade" role="dialog">
+				  <div class="modal-dialog">
+
+					<!-- Modal content-->
+					<div class="modal-content">
+					  <div class="ebulletin-dahboard-modal-header modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">Add Post</h4>
+					  </div>
+					  <div class="modal-body ebulletin-add-post-modal-body">
+							<div class="form-group success_div text-center">
+								
+							</div>
+							 <div class="form-group">
+								  <input class="form-control t_title" id="t_title" placeholder="Title" type="text">
+							</div>
+							 <div class="form-group">
+								  <input class="form-control s_subject" id="s_subject" placeholder="Subject" type="text">
+							</div>
+							 <div class="form-group">
+								  <label for="focusedInput">File</label>
+								  <input class="form-control" id="f_file" type="file">
+							</div>
+							<div class="form-group">
+							  <textarea class="form-control description" rows="5" placeholder="Description" id="description"></textarea>
+							</div>
+							<div class="form-group">
+								<div class="row">
+									<div class="col-md-12">
+										<label for="comment">Posting Date:</label>
+									</div>
+									<div class="col-md-5">
+										<input class="form-control posting_date_from" id="posting_date_from" placeholder="From"  type="text">
+									 </div>
+									 <div class="col-md-5">
+										<input class="form-control posting_date_to" id="posting_date_to" placeholder="To"  type="text">
+									 </div>
+								</div>
+							</div>
+					  </div>
+					  <div class="modal-footer">
+						<input type="image" id = "submit" src="../images/icon/save.png" />
+						<input type="image" id = "cancel" data-dismiss="modal" src="../images/icon/cancel.png" />
+					  </div>
+					</div>
+
+				  </div>
+			</div>
