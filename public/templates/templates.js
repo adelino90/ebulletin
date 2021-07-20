@@ -17,7 +17,7 @@ templates['contact'] = template({"compiler":[7,">= 4.0.0"],"main":function(conta
     + "\n\n\n        </div>\n ";
 },"useData":true});
 templates['content'] = template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    return "<div id = \"e-bulletin-main-content\" class=\"row\">\n		\n			<div class=\"col-md-12 ebulletin-navigtion\">\n				\n			</div>\n		\n	\n			<div class=\"col-md-9 ebulletin-content\">\n				\n			</div>\n			<div class=\"col-md-3 ebulletin-content-side-content\">\n				\n			</div>\n		<div class=\"footer\">\n			<p>@All Rights Reserved<br>E Bulletin 2021</p>\n		</div>\n	</div>";
+    return "<div id = \"e-bulletin-main-content\" class=\"row\">\n		\n			<div class=\"col-md-12 ebulletin-navigtion\">\n				\n			</div>\n		\n	\n			<div class=\"col-md-9 ebulletin-content\">\n				\n			</div>\n			<div class=\"col-md-3 ebulletin-content-side-content\">\n				\n			</div>\n\n\n		<div class=\"footer\">\n			<p>@All Rights Reserved<br>E Bulletin 2021</p>\n		</div>\n	</div>";
 },"useData":true});
 templates['dashboard'] = template({"1":function(container,depth0,helpers,partials,data) {
     var helper, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
@@ -180,7 +180,7 @@ templates['index'] = template({"1":function(container,depth0,helpers,partials,da
     + "\r\n  \r\n    </div>\r\n\r\n    <!-- Left and right controls -->\r\n    <a class=\"left carousel-control\" href=\"#myCarousel\" role=\"button\" data-slide=\"prev\">\r\n      <span class=\"glyphicon glyphicon-chevron-left\" aria-hidden=\"true\"></span>\r\n      <span class=\"sr-only\">Previous</span>\r\n    </a>\r\n    <a class=\"right carousel-control\" href=\"#myCarousel\" role=\"button\" data-slide=\"next\">\r\n      <span class=\"glyphicon glyphicon-chevron-right\" aria-hidden=\"true\"></span>\r\n      <span class=\"sr-only\">Next</span>\r\n    </a>\r\n  </div>\r\n      \r\n\r\n        </div>";
 },"useData":true});
 templates['loader'] = template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    return "<div class=\"loader\"><img src=\"../images/1488.gif\"></div>";
+    return "  <div style=\"display: none;\" class=\"pop-up-container loader\">\r\n        <img src=\"../images/1488.gif\">\r\n            \r\n        </div>";
 },"useData":true});
 templates['pagination'] = template({"1":function(container,depth0,helpers,partials,data) {
     var stack1, alias1=depth0 != null ? depth0 : {};
@@ -193,7 +193,7 @@ templates['pagination'] = template({"1":function(container,depth0,helpers,partia
     + ((stack1 = helpers.unless.call(alias1,(depth0 != null ? depth0.endAtLastPage : depth0),{"name":"unless","hash":{},"fn":container.program(9, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "    </div>\r\n";
 },"2":function(container,depth0,helpers,partials,data) {
-    return "     <a class=\"prev page-numbers\" href=\"javascript:;\">prev</a>\r\n";
+    return "     <a class=\"prev page-numbers\" data-id=\"prev\" href=\"javascript:;\">prev</a>\r\n";
 },"4":function(container,depth0,helpers,partials,data) {
     var stack1, alias1=depth0 != null ? depth0 : {};
 
@@ -216,13 +216,16 @@ templates['pagination'] = template({"1":function(container,depth0,helpers,partia
     + alias4(((helper = (helper = helpers.page || (depth0 != null ? depth0.page : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"page","hash":{},"data":data}) : helper)))
     + "</a>\r\n";
 },"9":function(container,depth0,helpers,partials,data) {
-    return "       <a class=\"next page-numbers\" href=\"javascript:;\">next</a>\r\n";
+    return "       <a class=\"next page-numbers\" data-id=\"next\" href=\"javascript:;\">next</a>\r\n";
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1;
 
   return "<div class=\"pagination-wrapper\">\r\n"
     + ((stack1 = (helpers.pagination || (depth0 && depth0.pagination) || helpers.helperMissing).call(depth0 != null ? depth0 : {},(depth0 != null ? depth0.currentPage : depth0),(depth0 != null ? depth0.pageCount : depth0),(depth0 != null ? depth0.size : depth0),{"name":"pagination","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "</div>\r\n";
+},"useData":true});
+templates['pdf_popup'] = template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    return "				<div class=\"pdf-modal-popup\">\r\n					<div class=\"wrapper\">\r\n					<span id=\"close\">&times;</span>\r\n					<h1>Hello</h1>\r\n					</div>\r\n					</div>\r\n				</div>";
 },"useData":true});
 templates['popup'] = template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     return "     \r\n     \r\n        <div style=\"display: none;\" class=\"pop-up-container\">\r\n\r\n            <div class=\"row pop-inner\">\r\n                <div class=\"col-md-12\">\r\n                    <button class=\"close\">X</button>\r\n                    <h2 id=\"ebulletin_popup_message\" class=\"modal__text\"></h2>\r\n                  <button class=\"confirm modal__btn \">Yes</button>\r\n                  <button class=\"cancel modal__btn \">no</button>\r\n                </div>\r\n            </div>\r\n            \r\n        </div>";
@@ -253,6 +256,9 @@ templates['post_request'] = template({"1":function(container,depth0,helpers,part
   return "\n				<div class=\"col-md-12 ebulletin-post_request-content\">\n					<div class=\"row\">\n						<div class=\"col-md-12 ebulletin-post_request-options\">\n							<div class=\"row\">\n								<div class=\"ebulletin-post_request-options-left\">\n									<h4>Post Request Management</h4>\n								</div>\n								<div class=\"ebulletin-post_request-options-right\">\n									<button type=\"button\" class=\"btn btn-success\" data-toggle=\"modal\" data-target=\"#ebulletin-add-post-container\">Add Post</button>\n								</div>\n							</div>\n					\n						</div>\n					</div>\n					<div class=\"row\">\n						<div class=\"col-md-12 ebulletin-post_request-list\">\n							<div class=\"col-md-12 \">\n								<h4>Posts</h4>\n							</div>\n							<div class = \"row\">\n								<div class=\"col-md-12\">\n								<table class=\"table ebulletin-post_request-table\">\n									<thead>\n									  <tr>\n										<th>Title</th>\n                    <th>Posted by</th>\n										<th>Status</th>\n										<th>Date Submitted</th>\n										<th>Action</th>\n									  </tr>\n									</thead>\n									<tbody>\n										   <!-- Data Here -->\n"
     + ((stack1 = helpers.each.call(depth0 != null ? depth0 : {},(depth0 != null ? depth0.dashboard_data : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "												<!-- data -->\n									</tbody>\n								  </table>\n								</div>\n							</div>\n						</div>\n					</div>\n				</div>\n\n		";
+},"useData":true});
+templates['side_content'] = template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    return "<table style=\"width:100%\">\r\n					<tr>\r\n						<th>Title</th>\r\n						<th>File</th>\r\n					</tr>\r\n					<tr class=\"ebulletin_side_content_table_row\">\r\n						<td class = \"ebulletin_side_content_content_title\">Prog 105 Grades</td>\r\n						<td class = \"ebulletin_side_content_filename\">prog_105_grades.pdf</td>\r\n					</tr>\r\n					<tr class=\"ebulletin_side_content_table_row\">\r\n						<td class = \"ebulletin_side_content_content_title\">Logic 100 Grades</td>\r\n						<td class = \"ebulletin_side_content_filename\">logic_100_grades.pdf</td>\r\n\r\n					</tr>\r\n				</table>";
 },"useData":true});
 templates['users'] = template({"1":function(container,depth0,helpers,partials,data) {
     var helper, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
@@ -293,21 +299,21 @@ templates['user_post_data'] = template({"compiler":[7,">= 4.0.0"],"main":functio
 templates['view_post'] = template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var helper, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
 
-  return " \n\n					<div class=\"row\">\n						<div class =\"col-md-4 col-md-offset-4 post_container\">\n							<div class=\"row\">\n										<div class =\"col-md-12\">\n											<div class=\"form-group\">\n													<label for=\"focusedInput\">Title</label>\n													<input class=\"form-control\" id=\"t_title\" type=\"text\" value =\""
+  return " \n\n					<div class=\"row\">\n						<div class =\"col-md-6 col-md-offset-3 post_container\">\n							<div class=\"row\">\n										<div class =\"col-md-12\">\n											<div class=\"form-group\">\n													<label for=\"focusedInput\">Title</label>\n													<input class=\"form-control\" id=\"t_title\" type=\"text\" value =\""
     + alias4(((helper = (helper = helpers.title || (depth0 != null ? depth0.title : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"title","hash":{},"data":data}) : helper)))
     + "\">\n											</div>\n										</div>\n							</div>\n\n							<div class=\"row\">\n										<div class =\"col-md-12\">\n											<div class=\"form-group\">\n													<label for=\"focusedInput\">Subject</label>\n													<input class=\"form-control\" id=\"s_subject\" type=\"text\" value = \""
     + alias4(((helper = (helper = helpers.subject || (depth0 != null ? depth0.subject : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"subject","hash":{},"data":data}) : helper)))
-    + "\">\n											</div>\n									</div>\n							</div>\n\n							<div class=\"row\">\n										<div class =\"col-md-12\">					\n												<div class=\"form-group\">\n														<label for=\"focusedInput\">File</label>\n													<img src=\"../upload/"
+    + "\">\n											</div>\n									</div>\n							</div>\n\n							<div class=\"row\">\n										<div class =\"col-md-12\">					\n												<div class=\"form-group\">\n														<label for=\"focusedInput\">File</label>\n													<img id=\"img_post_image\" src=\"../upload/"
     + alias4(((helper = (helper = helpers.filename || (depth0 != null ? depth0.filename : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"filename","hash":{},"data":data}) : helper)))
-    + "\" class=\"img-rounded\" alt=\"Cinque Terre\" width=\"304\" height=\"236\">\n												</div>\n									</div>\n							</div>\n\n							<div class=\"row\">\n										<div class =\"col-md-12\">	\n												<div class=\"form-group\">\n													<label for=\"comment\">Description:</label>\n													<textarea class=\"form-control\" rows=\"5\" id=\"description\">"
+    + "\" class=\"img-rounded\" alt=\"Cinque Terre\">\n												</div>\n									</div>\n							</div>\n\n							<div class=\"row\">\n										<div class =\"col-md-12\">	\n												<div class=\"form-group\">\n													<label for=\"comment\">Description:</label>\n													<textarea class=\"form-control\" rows=\"5\" id=\"description\">"
     + alias4(((helper = (helper = helpers.description || (depth0 != null ? depth0.description : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"description","hash":{},"data":data}) : helper)))
     + "</textarea>\n												</div>\n										</div>\n							</div>\n\n							<div class=\"row\">\n										<div class =\"col-md-12\">\n											<div class=\"form-group\">\n												<div class=\"row\">\n													<div class=\"col-md-12\">\n														<label for=\"comment\">Posting Date:</label>\n													</div>\n													<div class=\"col-md-5\">\n														<input class=\"form-control\" id=\"posting_date_from\" placeholder=\"From\" value =\""
     + alias4(((helper = (helper = helpers.posting_date_from || (depth0 != null ? depth0.posting_date_from : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"posting_date_from","hash":{},"data":data}) : helper)))
     + "\"  type=\"text\">\n													</div>\n													<div class=\"col-md-5\">\n														<input class=\"form-control\" id=\"posting_date_to\" placeholder=\"To\"  value =\""
     + alias4(((helper = (helper = helpers.posting_date_to || (depth0 != null ? depth0.posting_date_to : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"posting_date_to","hash":{},"data":data}) : helper)))
-    + "\"  type=\"text\">\n													</div>\n												</div>\n											</div>\n					 					</div>\n							</div>\n							<div class=\"row\">\n										<div class =\"col-md-12\">\n											<button type=\"button\" class=\"btn btn-success\" data-id=\""
+    + "\"  type=\"text\">\n													</div>\n												</div>\n											</div>\n					 					</div>\n							</div>\n							<div class=\"row\">\n										<div class =\"col-md-12\">\n											<button type=\"button\" class=\"modal__btn\" data-id=\""
     + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
-    + "\" id = \"Approve\">Approve</button>\n											<button type=\"button\" class=\"btn btn-danger\" data-id=\""
+    + "\" id = \"Approve\">Approve</button>\n											<button type=\"button\" class=\"modal__btn\" data-id=\""
     + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
     + "\" id = \"Reject\">Reject</button>\n										</div>\n							</div>\n					</div>\n				</div>	";
 },"useData":true});
@@ -332,6 +338,6 @@ templates['view_user'] = template({"1":function(container,depth0,helpers,partial
     + alias2(alias1(((stack1 = (depth0 != null ? depth0.data : depth0)) != null ? stack1.last_name : stack1), depth0))
     + "\" placeholder=\"Enter Last Name\" name=\"Lastname\">\n            </div>\n            </div>\n             <div class=\"form-group text-center\">\n            <label >Usertype:</label>\n            <div>\n               <select id =\"user_type\">\n"
     + ((stack1 = helpers.each.call(depth0 != null ? depth0 : {},(depth0 != null ? depth0.dropdown : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "                </select>\n            </div>\n            </div>\n            <div class=\"form-group text-center\">        \n            <div class=\"col-md-12 e-bulletin-button-grp\">\n                <button type=\"submit\" class=\"btn btn-info\" id = \"user_submit\">Submit</button>\n                <button type=\"submit\" class=\"btn btn-danger\" id = \"user_cancel\">Cancel</button>\n            </div>\n            </div>\n    </div>";
+    + "                </select>\n            </div>\n            </div>\n            <div class=\"form-group text-center\">        \n            <div class=\"col-md-12 e-bulletin-button-grp\">\n                <button type=\"submit\" class=\"modal__btn\" id = \"user_submit\">Submit</button>\n                <button type=\"submit\" class=\"modal__btn\" id = \"user_cancel\">Cancel</button>\n            </div>\n            </div>\n    </div>";
 },"useData":true});
 })();

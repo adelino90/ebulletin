@@ -6,8 +6,9 @@ configMap = {
 	
 	
     e_bulletin_model:null,
-	changeAnchorPart:null,	
-    settable_map : { e_bulletin_model:true,changeAnchorPart:true}
+	changeAnchorPart:null,
+    showpopups:null,	
+    settable_map : { e_bulletin_model:true,changeAnchorPart:true,showpopups:true}
 },
 stateMap = {$container : undefined, anchor_map : {} ,resize_idto : undefined },
 jqueryMap = {},
@@ -40,13 +41,22 @@ sethelpers = function(){
 
 }
 
-setcontent = function(){
+setcontent = function($side_content){
     sethelpers();
     var data_obj= {};
-configMap.e_bulletin_model.get_bulletin(function(response){
-    data_obj.bulletin_data = response
-    stateMap.$container.html(Handlebars.templates.home(data_obj));
-});
+    configMap.e_bulletin_model.get_bulletin(function(response){
+        data_obj.bulletin_data = response
+        stateMap.$container.html(Handlebars.templates.home(data_obj));
+        configMap.showpopups.init(stateMap.$container)
+        setJqueryMap();
+        jqueryMap.$side_content=$side_content
+        jqueryMap.$side_content.html(Handlebars.templates.side_content());
+        jqueryMap.$filename=jqueryMap.$side_content.find('.ebulletin_side_content_filename')
+        jqueryMap.$filename.click(function(){
+            configMap.showpopups.pdfpopup()
+        })
+    
+    });
 
 
 
@@ -55,11 +65,11 @@ configMap.e_bulletin_model.get_bulletin(function(response){
 
 
 
-initModule = function ( $container ) {
+initModule = function ( $container,$side_content ) {
 	// load HTML and map jQuery collections
 	stateMap.$container = $container;
 	stateMap.$container.off().empty();
-	setcontent();
+	setcontent($side_content);
 	setJqueryMap();
 	
 	// initialize chat slider and bind click handler

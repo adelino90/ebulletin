@@ -2,7 +2,7 @@
       {{#pagination currentPage pageCount size}}
     <div class="pagination">
       {{#unless startFromFirstPage}}
-     <a class="prev page-numbers" href="javascript:;">prev</a>
+     <a class="prev page-numbers" data-id="prev" href="javascript:;">prev</a>
       {{/unless}}
 
       {{#each pages}}
@@ -15,7 +15,7 @@
       {{/each}}
 
       {{#unless endAtLastPage}}
-       <a class="next page-numbers" href="javascript:;">next</a>
+       <a class="next page-numbers" data-id="next" href="javascript:;">next</a>
       {{/unless}}
     </div>
     {{/pagination}}

@@ -45,7 +45,8 @@ setJqueryMap = function () {
 	jqueryMap = { $container : $container,
 	//$main : $container.find('.spa-shell-main'),
 	 $content   : $container.find('.ebulletin-content'),	
-	$nav : $container.find('.ebulletin-navigtion')
+	$nav : $container.find('.ebulletin-navigtion'),
+	$side_content:$container.find('.ebulletin-content-side-content')
 	};
 };
 // End DOM method /setJqueryMap/
@@ -180,14 +181,14 @@ onHashchange = function ( event ) {
 			s_option_proposed = anchor_map_proposed.option;
 		switch(s_option_proposed){
 			case "manage_posts":
-				ebulletin.post_request.initModule( jqueryMap.$content );
+				ebulletin.post_request.initModule( jqueryMap.$content,anchor_map_proposed._option.id,anchor_map_proposed._option.id2 );
 			break;
 			case "dashboard":
 				ebulletin.dashboard.initModule( jqueryMap.$content,anchor_map_proposed._option.id);
 			break;
 			case "home":
 					setLoader.open();
-					ebulletin.home.initModule( jqueryMap.$content );
+					ebulletin.home.initModule( jqueryMap.$content ,jqueryMap.$side_content);
 			break;
 			case "contact":
 				setLoader.open();
@@ -198,7 +199,7 @@ onHashchange = function ( event ) {
 				ebulletin.about.initModule( jqueryMap.$content );
 			break;
 			case "view_post":
-				ebulletin.view_post.initModule(jqueryMap.$content,anchor_map_proposed._option.id);
+				ebulletin.view_post.initModule(jqueryMap.$content,anchor_map_proposed._option.id,anchor_map_proposed._option.id2);
 			break;
 			case "edit_view_post":
 				ebulletin.edit_view_post.initModule(jqueryMap.$content,anchor_map_proposed._option.id,anchor_map_proposed._option.id2);
@@ -308,6 +309,7 @@ setcontent = function($container){
 	ebulletin.model.bulletin_board.get_bulletin(function(response){
     	data_obj.bulletin_data = response
     	jqueryMap.$content.html(Handlebars.templates.index(data_obj));
+
     });
 }
 // End callback method /setChatAnchor/
@@ -318,7 +320,7 @@ setcontent = function($container){
 
 showpopups=(function () {
 	'use strict';
-	var init,imagepopup,message_popup;
+	var init,imagepopup,message_popup,pdfpopup;
 	
 	imagepopup=function($clicked_item,img_title){
 		const clickedimage=$clicked_item;
@@ -336,9 +338,16 @@ showpopups=(function () {
 	   
 		})
 	}
+	pdfpopup=function(){
+		$('body').css('overflow','auto')
+		$('.pdf-modal-popup').css('display','block');
+		
+
+	}
 	init=function($container){
 		$container.append(Handlebars.templates.image_popup())
 		$container.append(Handlebars.templates.popup());
+		$container.append(Handlebars.templates.pdf_popup());
 	}
 	message_popup=function($pop_up_container,message,type,proceedto,activepage){
 		var $message_popup_components={}
@@ -372,7 +381,8 @@ showpopups=(function () {
 	return {
 		imagepopup:imagepopup,
 		init:init,
-		message_popup:message_popup
+		message_popup:message_popup,
+		pdfpopup:pdfpopup
 	  };
 }());
 
@@ -449,7 +459,8 @@ initModule = function ( $container ) {
 	ebulletin.view_post.configModule({
 		change_option_anchor:setOptionAnchor,
 		admin_user  : admin_authorize,
-		dashboard_model  : ebulletin.model.dashboard
+		dashboard_model  : ebulletin.model.dashboard,
+		showpopups:showpopups
 	})
 	ebulletin.users.configModule({
 		change_option_anchor:setOptionAnchor,
@@ -475,7 +486,8 @@ initModule = function ( $container ) {
 	})
 	ebulletin.home.configModule({
 		e_bulletin_model:ebulletin.model.bulletin_board,
-		changeAnchorPart:changeAnchorPart
+		changeAnchorPart:changeAnchorPart,
+		showpopups:showpopups
 	})
 
 	 ebulletin.nav.initModule(jqueryMap.$nav);

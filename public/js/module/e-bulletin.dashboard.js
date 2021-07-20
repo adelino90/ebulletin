@@ -237,8 +237,19 @@ ondashboard_delete = function(value,tr){
 
 }
 change_page=function(e){
-var setpageto = $(this).attr("data-id")
-configMap.change_option_anchor('dashboard',setpageto,( ( new Date() ).getSeconds() + 10000 ).toString( 36 ))	
+
+	if(parseInt($(this).attr("data-id"))){
+		var setpageto = $(this).attr("data-id")
+		configMap.change_option_anchor('dashboard',setpageto,( ( new Date() ).getSeconds() + 10000 ).toString( 36 ))	
+	}
+	else if($(this).attr("data-id")=="next"){
+		configMap.activepage=parseInt(configMap.activepage)+1;
+		configMap.change_option_anchor('dashboard',configMap.activepage,( ( new Date() ).getSeconds() + 10000 ).toString( 36 ))	
+	}
+	else if($(this).attr("data-id")=="prev"){
+		configMap.activepage=parseInt(configMap.activepage)-1;
+		configMap.change_option_anchor('dashboard',configMap.activepage,( ( new Date() ).getSeconds() + 10000 ).toString( 36 ))	
+	}
 
 }
 

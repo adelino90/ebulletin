@@ -145,16 +145,37 @@ get_dashboard = function(session_id,page_number,callback){
 	})
 })
 
+
+
+
+
 }
-get_admin_dashboard = function(id,callback){
+get_admin_dashboard = function(id,page_number,callback){
       sql.close();
-	  const request = new sql.Request(gpool)
-	  	request.input('user_id', sql.Int, id)
-		request.execute('admin_post_view', (err, result) => {
-		
-		callback(result.recordset);
-    // ... 
-	})
+	  const request1 = new sql.Request(gpool)
+	  const request2 = new sql.Request(gpool)
+	  request2.execute('get_admin_page_count', (err, result2) => {
+	  	request1.input('user_id', sql.Int, id)
+		  request1.input('page_number', sql.Int, page_number)
+		request1.execute('admin_post_view', (err, result1) => {
+			var totalpage=0;
+			if(result2.recordset[0].pagecount%10!=0&&result2.recordset[0].pagecount>10){
+				totalpage=parseInt((result2.recordset[0].pagecount/10)+1);
+			}
+			if(result2.recordset[0].pagecount<=10){
+				totalpage=0;
+			}
+			if(result2.recordset[0].pagecount%10==0){
+				totalpage=result2.recordset[0].pagecount/10;
+			}
+
+
+	
+					callback(result1.recordset,totalpage);
+				// ... 
+				})
+		})
+
 }
 
 

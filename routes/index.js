@@ -272,10 +272,14 @@ app.get('/file', function(req,res){
 	 res.render('upload',{});
 });
 
-app.get('/manage_posts', function(req,res){
+app.post('/manage_posts', function(req,res){
+	var return_object={}
 	var user_id = req.session.user_ID;
-	 model.get_admin_dashboard(user_id,function(ret){
-		 res.send(ret);
+	page_number=req.body.page_number;
+	 model.get_admin_dashboard(user_id,page_number,function(ret,pagecount){
+		return_object.dashboard_data=ret;
+		return_object.pagecount=pagecount
+		 res.send(return_object);
 	 })
 });
 
