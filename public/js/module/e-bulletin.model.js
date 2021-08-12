@@ -97,12 +97,13 @@ contact= (function(){
 
 dashboard = (function(){
   
-   var submitdata,get_dashboard,delete_post,get_admin_post,get_post,approve_request,get_users,update_upload,update_upload2;
+   var submitdata,get_dashboard,get_pdf_post,delete_post,get_admin_post,get_post,approve_request,get_users,update_upload,update_upload2;
 
      submitdata = curryUploadData("/upload");
      update_upload=curryUploadData("/update_upload");
      update_upload2=curryStoreData("/update_upload");
      get_dashboard = curryStoreData("/get_dashboard");
+     get_pdf_post = curryStoreData("/get_pdf_post");
      delete_post = curryStoreData("/delete_post");
      get_admin_post = curryStoreData("/manage_posts");      
      get_post =  curryStoreData("/get_post");     
@@ -118,7 +119,8 @@ dashboard = (function(){
     approve_request:approve_request,
     get_users:get_users,
     update_upload:update_upload,
-    update_upload2:update_upload2
+    update_upload2:update_upload2,
+    get_pdf_post:get_pdf_post
     }
 
    }());

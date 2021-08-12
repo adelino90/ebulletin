@@ -4,10 +4,10 @@
 						<div class="col-md-12 ebulletin-dashboard-options">
 							<div class="row">
 								<div class="ebulletin-dashboard-options-left">
-									<h4>Welcome To Your Main Post Dashboard</h4>
+									<h4>Welcome To Your PDF Post Dashboard</h4>
 								</div>
 								<div class="ebulletin-dashboard-options-right">
-									<button type="button" class="btn btn-success" data-toggle="modal" data-target="#ebulletin-add-post-container">Add Post</button>
+									<button type="button" class="btn btn-success" data-toggle="modal" data-target="#ebulletin-add-post-container">Add PDF Post</button>
 								</div>
 							</div>
 					
@@ -24,17 +24,17 @@
 									<thead>
 									  <tr>
 										<th>Title</th>
-										<th>Status</th>
+										<th>File Name</th>
 										<th>Date Submitted</th>
 										<th>Action</th>
 									  </tr>
 									</thead>
 									<tbody>
-										 {{#each dashboard_data}}
+										{{#each dashboard_data}}
 												<tr>
-														<td class="post_title">{{title}}</td>
-														<td><span class="{{stat}}">{{stat}}</span></td>
-														<td>{{date_submited}}</td>
+														<td class="post_title">{{pdf_title}}</td>
+														<td><span class="{{stat}}">{{pdf_filename}}</span></td>
+														<td>{{datesubmitted}}</td>
 														<td><i class="fa fa-pencil-square-o ebulletin-dashboard-edit" data-id={{id}}></i>&nbsp;<i class="fa fa-trash ebulletin-dashboard-delete" data-id={{id}}></i></td>
 												</tr>
 										{{/each}}
@@ -46,8 +46,7 @@
 					</div>
 				</div>
 
-		
-		<!-- Modal -->
+					<!-- Modal -->
 			<div id="ebulletin-add-post-container" class="modal fade" role="dialog">
 				  <div class="modal-dialog">
 
@@ -62,14 +61,11 @@
 								
 							</div>
 							 <div class="form-group">
-								  <input class="form-control t_title" id="t_title" placeholder="Title" type="text">
+								  <input class="form-control t_title" id="t_pdf_title" placeholder="Title" type="text">
 							</div>
 							 <div class="form-group">
-								  <input class="form-control s_subject" id="s_subject" placeholder="Subject" type="text">
-							</div>
-							 <div class="form-group">
-								  <label for="focusedInput">File</label>
-								  <input class="form-control" id="f_file" type="file">
+								  <label for="focusedInput">PDF File</label>
+								  <input class="form-control" id="f_pdf_file" type="file">
 							</div>
 							<div class="form-group">
 							  <textarea class="form-control description" rows="5" placeholder="Description" id="description"></textarea>

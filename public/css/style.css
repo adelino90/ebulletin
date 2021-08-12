@@ -68,3 +68,117 @@ background: #FFA07A;
   font-size: 1.5rem;
   font-family: Helvetica, Arial, sans-serif;
  }
+
+
+/* modal popup styles */
+.pdf-modal-popup {
+  position: fixed;
+  overflow: auto;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  animation: 500ms fadeIn;
+  display: none;
+}
+ 
+ .pdf-modal-popup .wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 1200px;
+  margin: auto;
+  margin-top: 30px;
+  position: relative;
+}
+
+.pdf-modal-popup .description {
+  text-align: center;
+}
+.pdf-modal-popup img {
+  width: 80%;
+  max-height: calc(100vh - 150px);
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+.pdf-modal-popup span {
+  position: absolute;
+  top: 0;
+  right: 10px;
+  font-size: 4rem;
+  color: red;
+  cursor: pointer;
+}
+.pdf-modal-popup p {
+  margin: 5px auto;
+  font-size: 1.1rem;
+}
+.pdf-modal-popup a {
+  margin-bottom: 5px;
+  display: inline-block;
+  color: #222;
+  font-weight: 500;
+  text-decoration: none;
+  background: #fff;
+  margin: 10px 10px;
+  padding: 10px 15px;
+  border-radius: 6px;
+}
+
+
+
+.main_post_menu,
+.main_post_menu::after {
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    -o-transition: all 0.3s;
+    transition: all 0.3s;
+  }
+  
+  .main_post_menu {
+    background: none;
+    border: 2px solid rgb(214, 229, 250);
+    border-radius: 10px 10px 10px 10px;
+    color: #383a39;
+    display: block;
+    font-size: 1.6em;
+    font-weight: bold;
+    margin: 1em auto;
+    padding: 2em 6em;
+    position: relative;
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+  .main_post_menu>p{
+    font: 1em sans-serif;
+  }
+  
+  .main_post_menu::before,
+  .main_post_menu::after {
+    background: #fff;
+    content: '';
+    position: absolute;
+    z-index: -1;
+  }
+  
+  .main_post_menu:hover {
+    background: rgb(191, 241, 253);
+    color: #fff;
+    transform: scale(0.99);
+    transition: 200ms ease-in;
+  }
+  
+
+  .main_post_menu::after {
+    background: rgb(157, 202, 243);
+    height: 0;
+    left: 0;
+    top: 0;
+    width: 100%;
+  }
+  
+  .main_post_menu:hover:after {
+    height: 100%;
+  }

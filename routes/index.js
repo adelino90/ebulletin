@@ -110,6 +110,7 @@ app.get('/about_us',function(req, res) {
 	
 });
 app.get('/getsession',  function(req,res){
+	console.log(req.session.user_ID)
 	if(req.session.user_ID)
 	 res.send({valid:"true"});
 	else 
@@ -259,6 +260,20 @@ app.post('/get_dashboard',function(req,res){
 		res.send(return_object);
 	 });
 });
+
+
+app.post('/get_pdf_post',function(req,res){
+	var return_object={}
+
+	 session_id =  req.session.user_ID;
+	 page_number=req.body.page_number;
+	 model.get_pdf_post(session_id,page_number,function(ret,pagecount){
+		return_object.dashboard_data=ret;
+		return_object.pagecount=pagecount
+		res.send(return_object);
+	 });
+});
+
 app.get('/get_page_count',function(req,res){
 
 	session_id =  req.session.user_ID;

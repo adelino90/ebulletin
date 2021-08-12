@@ -22,7 +22,7 @@ var $container = stateMap.$container;
 jqueryMap = {
         $title: $container.find('#t_title'),
         $date_from : $container.find('#posting_date_from'),
-        $pop_up_container:$container.find('.pop-up-container'),
+        $pop_up_container:$('body'),
         $f_file : $container.find('#f_file'),
         $date_to : $container.find('#posting_date_to'),
 		$description : $container.find('#description'),
@@ -54,7 +54,7 @@ helper = function(){
 }
 cancel = function(){
 
-    configMap.change_option_anchor('dashboard',configMap.previous_page_id,( ( new Date() ).getSeconds() + 10000 ).toString( 36 ))
+    configMap.change_option_anchor('main_post',configMap.previous_page_id,( ( new Date() ).getSeconds() + 10000 ).toString( 36 ))
 }
 
 
@@ -82,7 +82,7 @@ save_post=function(e){
 
         if(jqueryMap.fileuploaded){
             configMap.dashboard_model.update_upload(form,function(response){
-                configMap.showpopups.message_popup(jqueryMap.$pop_up_container,'Saved!','message','dashboard',configMap.previous_page_id)
+                configMap.showpopups.message_popup('Saved!','message','main_post',configMap.previous_page_id)
         
             })
         }
@@ -99,7 +99,7 @@ save_post=function(e){
             data=JSON.parse(stringdata)
             data.f_file=null;
             configMap.dashboard_model.update_upload2(data,function(response){
-            configMap.showpopups.message_popup(jqueryMap.$pop_up_container,'Saved!','message','dashboard',configMap.previous_page_id)
+            configMap.showpopups.message_popup('Saved!','message','main_post',configMap.previous_page_id)
 
             
             
@@ -117,7 +117,7 @@ helper();
         configMap.dashboard_model.get_post(data,function(response){
             
             stateMap.$container.html(Handlebars.templates.edit_view_post(response[0]));
-            configMap.showpopups.init(stateMap.$container);
+            //configMap.showpopups.init(stateMap.$container);
             helper();
             setJqueryMap();
             $.fn.datepicker.defaults.format = "yyyy/mm/dd";

@@ -47,7 +47,6 @@ setcontent = function($side_content){
     configMap.e_bulletin_model.get_bulletin(function(response){
         data_obj.bulletin_data = response
         stateMap.$container.html(Handlebars.templates.home(data_obj));
-        configMap.showpopups.init(stateMap.$container)
         setJqueryMap();
         jqueryMap.$side_content=$side_content
         jqueryMap.$side_content.html(Handlebars.templates.side_content());

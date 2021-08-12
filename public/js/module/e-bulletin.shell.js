@@ -18,7 +18,7 @@ configMap = {
 	anchor_schema_map : {
 	chat : { opened : true, closed : true , hidden:true },
 	bclick:{click:true},
-	option:{home:true,contact:true,about:true,dashboard:true,sign_out:true,manage_posts:true,edit_view_post:true,view_post:true,manage_users:true,view_user:true},
+	option:{home:true,contact:true,about:true,pdf_post:true,main_post:true,user_menu:true,dashboard:true,sign_out:true,manage_posts:true,edit_view_post:true,view_post:true,manage_users:true,view_user:true},
 	 _option : {id : true},
 	 filter:{search:true},
 	 _filter :{search_str:true}
@@ -46,7 +46,8 @@ setJqueryMap = function () {
 	//$main : $container.find('.spa-shell-main'),
 	 $content   : $container.find('.ebulletin-content'),	
 	$nav : $container.find('.ebulletin-navigtion'),
-	$side_content:$container.find('.ebulletin-content-side-content')
+	$side_content:$container.find('.ebulletin-content-side-content'),
+	$body : $container.find('.ebulletin-content-side-content').parent()
 	};
 };
 // End DOM method /setJqueryMap/
@@ -184,7 +185,14 @@ onHashchange = function ( event ) {
 				ebulletin.post_request.initModule( jqueryMap.$content,anchor_map_proposed._option.id,anchor_map_proposed._option.id2 );
 			break;
 			case "dashboard":
-				ebulletin.dashboard.initModule( jqueryMap.$content,anchor_map_proposed._option.id);
+				//ebulletin.dashboard.initModule( jqueryMap.$content,anchor_map_proposed._option.id);
+				ebulletin.user_menu.initModule( jqueryMap.$content,jqueryMap.$side_content);
+			break;
+			case "pdf_post":
+				ebulletin.pdf_post.initModule( jqueryMap.$content,anchor_map_proposed._option.id);
+			break;
+			case "main_post":
+				ebulletin.main_post.initModule( jqueryMap.$content,anchor_map_proposed._option.id);
 			break;
 			case "home":
 					setLoader.open();
@@ -306,9 +314,17 @@ sethelpers = function(){
 setcontent = function($container){
 	var data_obj= {};
 	$container.html( configMap.main_html );
+	setJqueryMap();
 	ebulletin.model.bulletin_board.get_bulletin(function(response){
     	data_obj.bulletin_data = response
     	jqueryMap.$content.html(Handlebars.templates.index(data_obj));
+		jqueryMap.$side_content.html(Handlebars.templates.side_content());
+		showpopups.init(jqueryMap.$body)
+		jqueryMap.$filename=$container.find('.ebulletin_side_content_filename')
+        jqueryMap.$filename.click(function(){
+            showpopups.pdfpopup()
+        })
+    
 
     });
 }
@@ -325,36 +341,50 @@ showpopups=(function () {
 	imagepopup=function($clicked_item,img_title){
 		const clickedimage=$clicked_item;
 		const title=img_title;
+		var $image_popup_components={}
+		$image_popup_components={
+			$image_modal_popup:$('body').find('.image-modal-popup'),
+			$image_modal_show:$('body').find('#image_modal_show'),
+			$description:$('body').find('.description'),
+			$image_modal_popup:$('body').find('#close, .image-modal-popup')
+		}
 	
 		$('body').css('overflow','auto')
-		$('.image-modal-popup').css('display','block');
-		$('.ebulletin-content-side-content').css('display','none');
-		$('#image_modal_show').attr('src',clickedimage.attr('src'));
-		$('.description').find('h1').html(title);
-		$('#close, .image-modal-popup').click(function(){
+		$image_popup_components.$image_modal_popup.css('display','block');
+		jqueryMap.$side_content.css('display','none');
+		$image_popup_components.$image_modal_show.attr('src',clickedimage.attr('src'));
+		$image_popup_components.$description.find('h1').html(title);
+		$image_popup_components.$image_modal_popup.click(function(){
 		   $('body').css('overflow','auto')
-			$('.image-modal-popup').css('display','none');
-			$('.ebulletin-content-side-content').css('display','block');
+		   $image_popup_components.$image_modal_popup.css('display','none');
+		   jqueryMap.$side_content.css('display','block');
 	   
 		})
 	}
 	pdfpopup=function(){
 		$('body').css('overflow','auto')
 		$('.pdf-modal-popup').css('display','block');
-		
+		$("#pdfframe").attr("src", "../pdf/AJustoResume.pdf");
 
+		$('#close, .image-modal-popup').click(function(){
+			$('body').css('overflow','auto')
+			 $('.pdf-modal-popup').css('display','none');
+			
+		
+		 })
 	}
 	init=function($container){
 		$container.append(Handlebars.templates.image_popup())
 		$container.append(Handlebars.templates.popup());
 		$container.append(Handlebars.templates.pdf_popup());
 	}
-	message_popup=function($pop_up_container,message,type,proceedto,activepage){
+	message_popup=function(message,type,proceedto,activepage){
 		var $message_popup_components={}
 		$message_popup_components={
-			$message:$pop_up_container.find('#ebulletin_popup_message'),
-			$cancel:$pop_up_container.find(".cancel, .close"),
-			$confirm:$pop_up_container.find(".confirm")
+			$message:$('body').find(".modal__text"),
+			$cancel:$('body').find(".cancel, .close"),
+			$confirm:$('body').find(".confirm"),
+			$pop_up_container:$('body').find(".pop-up-container")
 
 		}
 		$message_popup_components.$message.html(message);
@@ -364,15 +394,15 @@ showpopups=(function () {
 				$message_popup_components.$confirm.html("Ok")
 				$message_popup_components.$cancel.css("display", "none");
 				$message_popup_components.$confirm.click(function(){
-					$pop_up_container.fadeOut("slow")
-					if(proceedto)
+				$message_popup_components.$pop_up_container.fadeOut("slow")
+				if(proceedto)
 					setOptionAnchor(proceedto,activepage,( ( new Date() ).getSeconds() + 10000 ).toString( 36 ))
 				})
 			break;
 		}
-		$pop_up_container.fadeIn("slow");
+		$message_popup_components.$pop_up_container.fadeIn("slow");
 		$message_popup_components.$cancel.click(function(){
-			$pop_up_container.fadeOut("slow")
+			$message_popup_components.$pop_up_container.fadeOut("slow")
 
 		})
 		
@@ -445,7 +475,7 @@ initModule = function ( $container ) {
 		changeAnchorPart:changeAnchorPart,
 		contact_model: ebulletin.model.contact
 	})
-	ebulletin.dashboard.configModule({
+	ebulletin.main_post.configModule({
 		change_option_anchor:setOptionAnchor,
 		authorize_user  : user_authorize,
 		dashboard_model  : ebulletin.model.dashboard,
@@ -471,6 +501,18 @@ initModule = function ( $container ) {
 	ebulletin.about.configModule({
 		change_option_anchor:setOptionAnchor,
 		about_model:ebulletin.model.about
+	})
+	ebulletin.user_menu.configModule({
+		change_option_anchor:setOptionAnchor,
+		authorize_user  : user_authorize,
+		dashboard_model  : ebulletin.model.dashboard,
+		showpopups:showpopups
+	})
+	ebulletin.pdf_post.configModule({
+		change_option_anchor:setOptionAnchor,
+		authorize_user  : user_authorize,
+		dashboard_model  : ebulletin.model.dashboard,
+		showpopups:showpopups
 	})
 
 	ebulletin.view_user.configModule({

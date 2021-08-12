@@ -121,33 +121,56 @@ get_dashboard = function(session_id,callback){
 
 get_dashboard = function(session_id,page_number,callback){
 	sql.close();
- const request1 = new sql.Request(gpool)
- const request2 = new sql.Request(gpool)
+	const request1 = new sql.Request(gpool)
+	const request2 = new sql.Request(gpool)
 
- request1.input('user_id', sql.Int, session_id)
- request1.execute('get_page_count', (err1, result1) => {
+	request1.input('user_id', sql.Int, session_id)
+	request1.execute('get_page_count', (err1, result1) => {
 
 
-	 request2.input('user_id', sql.Int, session_id)
-	 request2.input('page_number', sql.Int, page_number)
-   	 request2.execute('get_dashboard', (err2, result2) => {
-		var totalpage=0;
-		if(result1.recordset[0].pagecount%5!=0&&result1.recordset[0].pagecount>5){
-			totalpage=parseInt((result1.recordset[0].pagecount/5)+1);
-		}
-		if(result1.recordset[0].pagecount<=5){
-			totalpage=0;
-		}
-		if(result1.recordset[0].pagecount%5==0)
-			totalpage=result1.recordset[0].pagecount/5;
-   	callback(result2.recordset,totalpage);
-// ... 
+		request2.input('user_id', sql.Int, session_id)
+		request2.input('page_number', sql.Int, page_number)
+		request2.execute('get_dashboard', (err2, result2) => {
+			var totalpage=0;
+			if(result1.recordset[0].pagecount%5!=0&&result1.recordset[0].pagecount>5){
+				totalpage=parseInt((result1.recordset[0].pagecount/5)+1);
+			}
+			if(result1.recordset[0].pagecount<=5){
+				totalpage=0;
+			}
+			if(result1.recordset[0].pagecount%5==0)
+				totalpage=result1.recordset[0].pagecount/5;
+		callback(result2.recordset,totalpage);
+	// ... 
+		})
 	})
-})
+}
+
+get_pdf_post = function(session_id,page_number,callback){
+	sql.close();
+	const request1 = new sql.Request(gpool)
+	const request2 = new sql.Request(gpool)
+
+	request1.input('user_id', sql.Int, session_id)
+	request1.execute('get_pdf_page_count', (err1, result1) => {
 
 
-
-
+		request2.input('user_id', sql.Int, session_id)
+		request2.input('page_number', sql.Int, page_number)
+		request2.execute('get_pdf_post', (err2, result2) => {
+			var totalpage=0;
+			if(result1.recordset[0].pagecount%5!=0&&result1.recordset[0].pagecount>5){
+				totalpage=parseInt((result1.recordset[0].pagecount/5)+1);
+			}
+			if(result1.recordset[0].pagecount<=5){
+				totalpage=0;
+			}
+			if(result1.recordset[0].pagecount%5==0)
+				totalpage=result1.recordset[0].pagecount/5;
+		callback(result2.recordset,totalpage);
+	// ... 
+		})
+	})
 
 }
 get_admin_dashboard = function(id,page_number,callback){
@@ -309,3 +332,4 @@ exports.login = login;
 exports.get_all_users = get_all_users;
 exports.view_user = view_user;
 exports.get_bulletin = get_bulletin;
+exports.get_pdf_post = get_pdf_post;

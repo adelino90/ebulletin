@@ -46,7 +46,7 @@ approve_post = function(e){
 	var data = {id:$(this).attr('data-id')};
 		configMap.dashboard_model.approve_request(data,function(response){
 			if(response=="OK")
-			configMap.showpopups.message_popup(jqueryMap.$pop_up_container,'Approved!','message','manage_posts',configMap.previous_page_id)
+			configMap.showpopups.message_popup('Approved!','message','manage_posts',configMap.previous_page_id)
 			
 
 		})
@@ -58,7 +58,7 @@ setcontent = function(id){
 
 		configMap.dashboard_model.get_post(data,function(response){
 			stateMap.$container.html(Handlebars.templates.view_post(response[0]));
-			configMap.showpopups.init(stateMap.$container);
+			//configMap.showpopups.init(stateMap.$container);
 			setJqueryMap();
 			$.fn.datepicker.defaults.format = "yyyy/mm/dd";
 			jqueryMap.$date_from.datepicker({});

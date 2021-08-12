@@ -1,4 +1,4 @@
-ebulletin.dashboard = (function () {
+ebulletin.main_post = (function () {
 			'use strict';
 //---------------- BEGIN MODULE SCOPE VARIABLES --------------
 var
@@ -218,7 +218,7 @@ for_delete = function(e){
 		var message = "Are you sure you want to delete \""+title+"\"?";
 		
 		value.post_id = post_id;
-		configMap.showpopups.message_popup(jqueryMap.$pop_up_container,message,'delete');
+		configMap.showpopups.message_popup(message,'delete');
 		
 		jqueryMap.$pop_up_container.find(".confirm").click(function(){
 			ondashboard_delete(value.post_id,tr)
@@ -240,15 +240,15 @@ change_page=function(e){
 
 	if(parseInt($(this).attr("data-id"))){
 		var setpageto = $(this).attr("data-id")
-		configMap.change_option_anchor('dashboard',setpageto,( ( new Date() ).getSeconds() + 10000 ).toString( 36 ))	
+		configMap.change_option_anchor('main_post',setpageto,( ( new Date() ).getSeconds() + 10000 ).toString( 36 ))	
 	}
 	else if($(this).attr("data-id")=="next"){
 		configMap.activepage=parseInt(configMap.activepage)+1;
-		configMap.change_option_anchor('dashboard',configMap.activepage,( ( new Date() ).getSeconds() + 10000 ).toString( 36 ))	
+		configMap.change_option_anchor('main_post',configMap.activepage,( ( new Date() ).getSeconds() + 10000 ).toString( 36 ))	
 	}
 	else if($(this).attr("data-id")=="prev"){
 		configMap.activepage=parseInt(configMap.activepage)-1;
-		configMap.change_option_anchor('dashboard',configMap.activepage,( ( new Date() ).getSeconds() + 10000 ).toString( 36 ))	
+		configMap.change_option_anchor('main_post',configMap.activepage,( ( new Date() ).getSeconds() + 10000 ).toString( 36 ))	
 	}
 
 }
