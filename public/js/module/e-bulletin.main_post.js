@@ -262,7 +262,7 @@ pagination_data.page_number=page_current;
 setHelper();
 
 		configMap.dashboard_model.get_dashboard(pagination_data,function(dashboard_response){
-	
+			if(pagenumber>dashboard_response.pagecount)configMap.change_option_anchor('main_post',1,( ( new Date() ).getSeconds() + 10000 ).toString( 36 ))
 			stateMap.$container.html(Handlebars.templates.dashboard({dashboard_data:dashboard_response.dashboard_data}));
 			configMap.showpopups.init(stateMap.$container);
 			stateMap.$container.append(Handlebars.templates.pagination({currentPage:parseInt(page_current),pageCount:dashboard_response.pagecount,size:5}))

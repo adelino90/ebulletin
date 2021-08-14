@@ -1,0 +1,9 @@
+
+										 {{#each dashboard_data}}
+												<tr>
+														<td class="post_title">{{pdf_title}}</td>
+														<td><span class="{{stat}}">{{pdf_filename}}</span></td>
+														<td>{{datesubmitted}}</td>
+														<td><i class="fa fa-pencil-square-o ebulletin-dashboard-edit" data-id={{id}}></i>&nbsp;<i class="fa fa-trash ebulletin-dashboard-delete" data-id={{id}}></i></td>
+												</tr>
+										{{/each}}

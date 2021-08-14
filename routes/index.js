@@ -110,7 +110,6 @@ app.get('/about_us',function(req, res) {
 	
 });
 app.get('/getsession',  function(req,res){
-	console.log(req.session.user_ID)
 	if(req.session.user_ID)
 	 res.send({valid:"true"});
 	else 
@@ -164,6 +163,42 @@ app.post('/upload',function(req,res){
 	 odata.date_from = req.body.date_from;
 	 odata.date_to = req.body.date_to;
 	 model.save_post(odata,function(rdata){
+		 if(rdata.recorded){
+			rdata.insert_status="Success";
+			res.send(rdata);
+		}
+	 })
+   
+
+  });
+	
+});
+
+
+
+app.post('/insert_pdf_post',function(req,res){
+
+	if (!req.files)
+    	return res.status(400).send('No files were uploaded.');
+ 
+  // The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file 
+  var sampleFile = req.files.filename;
+  var name = req.files.filename.name;
+  // Use the mv() method to place the file somewhere on your server 
+  sampleFile.mv('./public/pdf/'+name+'', function(err) {
+
+
+    if (err)
+      	return res.status(500).send(err);
+	 
+	 var odata = {};
+	 odata.user_id = req.session.user_ID;
+	 odata.pdf_title = req.body.pdf_title;
+	 odata.pdf_filename = name;
+	 odata.description = req.body.description;
+	 odata.date_from = req.body.date_from;
+	 odata.date_to = req.body.date_to;
+	 model.save_pdf_post(odata,function(rdata){
 		 if(rdata.recorded){
 			rdata.insert_status="Success";
 			res.send(rdata);

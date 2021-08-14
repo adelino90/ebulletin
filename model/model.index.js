@@ -74,6 +74,33 @@ save_post = function(data,callback){
 }
 
 
+
+save_pdf_post = function(data,callback){
+
+	sql.close();
+				const request = new sql.Request(gpool)
+				.input('user_id', sql.Int, data.user_id)
+				.input('pdf_title', sql.NVarChar, data.pdf_title)
+				.input('pdf_filename', sql.NVarChar, data.pdf_filename)
+				.input('description', sql.NVarChar, data.description)
+				.input('pdate_from', sql.NVarChar, data.date_from)
+				.input('pdate_to',  sql.NVarChar,data.date_to)
+				.input('status',  sql.NVarChar, false)
+				request.execute('insert_pdf_post', (err, result) => {
+					result.recorded=true;
+
+				callback(result);
+			// ... 
+			}).on('error', err => {
+				console.log(err)
+				callback(err)
+		 })
+		// var result={recorded:true};
+		 //callback(result);
+		 
+}
+
+
 update_post = function(data,callback){
 	sql.close();
 		const request = new sql.Request(gpool)
@@ -173,6 +200,12 @@ get_pdf_post = function(session_id,page_number,callback){
 	})
 
 }
+
+
+
+
+
+
 get_admin_dashboard = function(id,page_number,callback){
       sql.close();
 	  const request1 = new sql.Request(gpool)
@@ -326,6 +359,7 @@ exports.get_admin_dashboard = get_admin_dashboard;
 exports.get_dashboard = get_dashboard;
 exports.post_delete = post_delete;
 exports.save_post = save_post;
+exports.save_pdf_post = save_pdf_post;
 exports.update_post = update_post;
 exports.get_navigation = get_navigation;
 exports.login = login;

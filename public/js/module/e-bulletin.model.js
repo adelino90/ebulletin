@@ -97,9 +97,10 @@ contact= (function(){
 
 dashboard = (function(){
   
-   var submitdata,get_dashboard,get_pdf_post,delete_post,get_admin_post,get_post,approve_request,get_users,update_upload,update_upload2;
+   var submitdata,submitpdfdata,get_dashboard,get_pdf_post,delete_post,get_admin_post,get_post,approve_request,get_users,update_upload,update_upload2;
 
      submitdata = curryUploadData("/upload");
+     submitpdfdata = curryUploadData("/insert_pdf_post");
      update_upload=curryUploadData("/update_upload");
      update_upload2=curryStoreData("/update_upload");
      get_dashboard = curryStoreData("/get_dashboard");
@@ -112,6 +113,7 @@ dashboard = (function(){
      
     return {
     submitdata:submitdata,
+    submitpdfdata:submitpdfdata,
     get_dashboard:get_dashboard,
     delete_post:delete_post,
     get_admin_post:get_admin_post,
