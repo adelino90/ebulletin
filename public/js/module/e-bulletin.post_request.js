@@ -109,15 +109,15 @@ change_page =function(e){
 
 	if(parseInt($(this).attr("data-id"))){
 		var setpageto = $(this).attr("data-id")
-		configMap.change_option_anchor('manage_posts',setpageto,( ( new Date() ).getSeconds() + 10000 ).toString( 36 ))
+		configMap.change_option_anchor('admin_manage_main_posts',setpageto,( ( new Date() ).getSeconds() + 10000 ).toString( 36 ))
 	}
 	else if($(this).attr("data-id")=="next"){
 		configMap.activepage=parseInt(configMap.activepage)+1;
-		configMap.change_option_anchor('manage_posts',configMap.activepage,( ( new Date() ).getSeconds() + 10000 ).toString( 36 ))
+		configMap.change_option_anchor('admin_manage_main_posts',configMap.activepage,( ( new Date() ).getSeconds() + 10000 ).toString( 36 ))
 	}
 	else if($(this).attr("data-id")=="prev"){
 		configMap.activepage=parseInt(configMap.activepage)-1;
-		configMap.change_option_anchor('manage_posts',configMap.activepage,( ( new Date() ).getSeconds() + 10000 ).toString( 36 ))
+		configMap.change_option_anchor('admin_manage_main_posts',configMap.activepage,( ( new Date() ).getSeconds() + 10000 ).toString( 36 ))
 	}
 }
 setcontent = function(pagenumber){

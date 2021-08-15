@@ -44,18 +44,25 @@ setHelper=function(){
 
 
 
-setcontent = function(){
+setcontent = function(usertype){
     var pagination_data={}
 	pagination_data.page_number=1;
     configMap.dashboard_model.get_dashboard(pagination_data,function(dashboard_response){
         stateMap.$container.html(Handlebars.templates.user_menu_page());
         setJqueryMap();
         jqueryMap.$main_post.click(function(){
-
-            configMap.change_option_anchor('main_post',"ebulletin",( ( new Date() ).getSeconds() + 10000 ).toString( 36 ))	
+            if(usertype==2)
+                configMap.change_option_anchor('main_post',"ebulletin",( ( new Date() ).getSeconds() + 10000 ).toString( 36 ))	
+            else if(usertype==1)
+                configMap.change_option_anchor('admin_manage_main_posts',"ebulletin",( ( new Date() ).getSeconds() + 10000 ).toString( 36 ))	
+               
         })
         jqueryMap.$pdf_post.click(function(){
-            configMap.change_option_anchor('pdf_post',"ebulletin",( ( new Date() ).getSeconds() + 10000 ).toString( 36 ))	
+            if(usertype==2)
+                configMap.change_option_anchor('pdf_post',"ebulletin",( ( new Date() ).getSeconds() + 10000 ).toString( 36 ))
+            else if(usertype==1)
+                alert("admin")	
+       
         })
 
 
@@ -65,18 +72,20 @@ setcontent = function(){
 
 
 initModule = function ($container) {
-stateMap.$container = $container;
-stateMap.$container.off().empty();
-configMap.authorize_user(function(response){
-if(!response){	
-    configMap.change_option_anchor('home','ebulletin',( ( new Date() ).getSeconds() + 10000 ).toString( 36 ))	
-}
-else{
-        
-        setcontent();
-    
-}
-})
+    stateMap.$container = $container;
+    stateMap.$container.off().empty();
+    configMap.authorize_user(function(response,usertype){
+     
+        if(!response){	
+            
+            configMap.change_option_anchor('home','ebulletin',( ( new Date() ).getSeconds() + 10000 ).toString( 36 ))	
+        }
+        else{
+                
+                setcontent(usertype);
+            
+        }
+    })
 };
-return { initModule : initModule,configModule:configModule };
+    return { initModule : initModule,configModule:configModule };
 }());

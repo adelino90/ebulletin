@@ -18,7 +18,7 @@ configMap = {
 	anchor_schema_map : {
 	chat : { opened : true, closed : true , hidden:true },
 	bclick:{click:true},
-	option:{home:true,contact:true,about:true,pdf_post:true,main_post:true,user_menu:true,dashboard:true,sign_out:true,manage_posts:true,edit_view_post:true,view_post:true,manage_users:true,view_user:true},
+	option:{home:true,contact:true,about:true,pdf_post:true,main_post:true,user_menu:true,dashboard:true,sign_out:true,manage_posts:true,admin_manage_main_posts:true,edit_view_post:true,view_post:true,manage_users:true,view_user:true},
 	 _option : {id : true},
 	 filter:{search:true},
 	 _filter :{search_str:true}
@@ -135,10 +135,11 @@ setLoader = (function(){
 
 user_authorize = function(fn){
 	ebulletin.model.account.get_session(function(data){
+
                if(data.valid=="false")
 					fn(false);
 			   else
-					fn(true);		
+					fn(true,data.usertype);		
 	 });			
 }
 admin_authorize = function(fn){
@@ -182,7 +183,12 @@ onHashchange = function ( event ) {
 			s_option_proposed = anchor_map_proposed.option;
 		switch(s_option_proposed){
 			case "manage_posts":
+				//ebulletin.post_request.initModule( jqueryMap.$content,anchor_map_proposed._option.id,anchor_map_proposed._option.id2 );
+				ebulletin.user_menu.initModule( jqueryMap.$content,jqueryMap.$side_content);
+			break;
+			case "admin_manage_main_posts":
 				ebulletin.post_request.initModule( jqueryMap.$content,anchor_map_proposed._option.id,anchor_map_proposed._option.id2 );
+				//ebulletin.user_menu.initModule( jqueryMap.$content,jqueryMap.$side_content);
 			break;
 			case "dashboard":
 				//ebulletin.dashboard.initModule( jqueryMap.$content,anchor_map_proposed._option.id);

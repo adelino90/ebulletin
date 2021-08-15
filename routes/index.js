@@ -111,7 +111,7 @@ app.get('/about_us',function(req, res) {
 });
 app.get('/getsession',  function(req,res){
 	if(req.session.user_ID)
-	 res.send({valid:"true"});
+	 res.send({valid:"true",usertype:req.session.req.session.usertype});
 	else 
 	 res.send({valid:"false"});
 

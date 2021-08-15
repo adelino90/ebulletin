@@ -1,0 +1,7 @@
+
+git add . 
+git commit -m "Your Message"
+git push --set-upstream origin main
+
+
+git remote add origin https://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@github.com/adelino90/ebulletin.git
