@@ -5,3 +5,8 @@ git push --set-upstream origin main
 
 
 git remote add origin https://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@github.com/adelino90/ebulletin.git
+
+
+
+
+git pull adelino90 main
