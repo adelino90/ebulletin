@@ -333,7 +333,7 @@ setcontent = function($container){
 		data_obj.main_post_data = response.main_post
         data_obj.pdf_post_data = response.pdf_post
     	jqueryMap.$content.html(Handlebars.templates.index(data_obj));
-		jqueryMap.$side_content.html(Handlebars.templates.side_content(ata_obj));
+		jqueryMap.$side_content.html(Handlebars.templates.side_content(data_obj));
 		showpopups.init(jqueryMap.$body)
 		jqueryMap.$filename=$container.find('.ebulletin_side_content_filename')
         jqueryMap.$filename.click(function(e){
