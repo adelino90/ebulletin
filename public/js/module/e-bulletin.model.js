@@ -97,7 +97,7 @@ contact= (function(){
 
 dashboard = (function(){
   
-   var submitdata,submitpdfdata,get_dashboard,get_pdf_post,delete_post,get_admin_post,get_post,approve_request,get_users,update_upload,update_upload2;
+   var submitdata,submitpdfdata,get_dashboard,get_pdf_post,get_pdf_post_for_aprroval,delete_post,get_admin_post,get_admin_pdf_post,get_post,approve_request,get_users,update_upload,update_upload2;
 
      submitdata = curryUploadData("/upload");
      submitpdfdata = curryUploadData("/insert_pdf_post");
@@ -107,7 +107,9 @@ dashboard = (function(){
      get_pdf_post = curryStoreData("/get_pdf_post");
      delete_post = curryStoreData("/delete_post");
      get_admin_post = curryStoreData("/manage_posts");      
+     get_admin_pdf_post = curryStoreData("/manage_pdf_posts");   
      get_post =  curryStoreData("/get_post");     
+     get_pdf_post_for_aprroval =  curryStoreData("/get_pdf_post_for_aprroval"); 
      approve_request =  curryStoreData("/approve_request");   
      get_users =  curryFetchData("/get_users");
      
@@ -117,6 +119,8 @@ dashboard = (function(){
     get_dashboard:get_dashboard,
     delete_post:delete_post,
     get_admin_post:get_admin_post,
+    get_pdf_post_for_aprroval:get_pdf_post_for_aprroval,
+    get_admin_pdf_post:get_admin_pdf_post,
     get_post:get_post,
     approve_request:approve_request,
     get_users:get_users,

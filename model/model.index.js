@@ -40,12 +40,19 @@ get_navigation = function(session,callback){
 get_bulletin = function(callback){
 	 var ret;
 	 sql.close();
+
 	const request = new sql.Request(gpool)
-		request.execute('get_bulletin', (err, result) => {
+	const request2 = new sql.Request(gpool)
 	
-		callback(result.recordset);
-    // ... 
+	request2.execute('get_pdf_list', (err, result2) => {
+		request.execute('get_bulletin', (err, result) => {
+		callback_data={main_post:result.recordset,pdf_post:result2.recordset}
+		callback(callback_data);
+    	
+		})
 	})
+
+
 }
 save_post = function(data,callback){
 
@@ -210,7 +217,9 @@ get_admin_dashboard = function(id,page_number,callback){
       sql.close();
 	  const request1 = new sql.Request(gpool)
 	  const request2 = new sql.Request(gpool)
+	  request2.input('table', sql.NVarChar, 'post_tbl')
 	  request2.execute('get_admin_page_count', (err, result2) => {
+		  console.log(result2)
 	  	request1.input('user_id', sql.Int, id)
 		  request1.input('page_number', sql.Int, page_number)
 		request1.execute('admin_post_view', (err, result1) => {
@@ -224,7 +233,7 @@ get_admin_dashboard = function(id,page_number,callback){
 			if(result2.recordset[0].pagecount%10==0){
 				totalpage=result2.recordset[0].pagecount/10;
 			}
-
+			console.log(totalpage)
 
 	
 					callback(result1.recordset,totalpage);
@@ -234,6 +243,36 @@ get_admin_dashboard = function(id,page_number,callback){
 
 }
 
+
+get_admin_pdf_dashboard = function(id,page_number,callback){
+	sql.close();
+	const request1 = new sql.Request(gpool)
+	const request2 = new sql.Request(gpool)
+	request2.input('table', sql.NVarChar, 'pdf_tbl')
+	request2.execute('get_admin_page_count', (err, result2) => {
+		
+		request1.input('user_id', sql.Int, id)
+		request1.input('page_number', sql.Int, page_number)
+	  request1.execute('admin_pdf_post_view', (err, result1) => {
+		  var totalpage=0;
+		  if(result2.recordset[0].pagecount%10!=0&&result2.recordset[0].pagecount>10){
+			  totalpage=parseInt((result2.recordset[0].pagecount/10)+1);
+		  }
+		  if(result2.recordset[0].pagecount<=10){
+			  totalpage=0;
+		  }
+		  if(result2.recordset[0].pagecount%10==0){
+			  totalpage=result2.recordset[0].pagecount/10;
+		  }
+	
+
+  
+				  callback(result1.recordset,totalpage);
+			  // ... 
+			  })
+	  })
+
+}
 
 view_post = function(data,callback){
 
@@ -252,6 +291,31 @@ view_post = function(data,callback){
 	  const request2 = new sql.Request(gpool)
 	  	request2.input('id', sql.Int, id)
 		request2.execute('view_post', (err, result) => {
+	
+		callback(result.recordset);
+    // ... 
+	})
+
+}
+
+
+view_pdf_post = function(data,callback){
+
+
+	var id = data.id, user_id = data.user_id
+	sql.close();
+
+	  const request1 = new sql.Request(gpool)
+		request1.input('user_id', sql.Int,user_id)
+		request1.input('id', sql.Int,id)
+		request1.query('INSERT into post_tbl_view(pdf_id,user_id) values (@id, @user_ID)', (err, result) => {
+
+	})
+
+	    sql.close();
+	  const request2 = new sql.Request(gpool)
+	  	request2.input('id', sql.Int, id)
+		request2.execute('view_pdf_post', (err, result) => {
 	
 		callback(result.recordset);
     // ... 
@@ -312,12 +376,14 @@ get_all_users = function(callback){
 		callback(err)
 	})
 }
-approve_request = function(id,callback){
-	var id = id;
+approve_request = function(inp_data,callback){
+	var id = inp_data.id;
+	var approve_type = inp_data.approve_type;
 	sql.close();
 	sql.connect(config, err => {
     new sql.Request()
 		.input('post_id', sql.Int, id)
+		.input('table', sql.NVarChar, approve_type)
 		.execute('approve_request', (err, result) => {
 
 			callback("OK");
@@ -355,7 +421,9 @@ exports.insert_user = insert_user;
 exports.update_user = update_user;
 exports.approve_request = approve_request;
 exports.view_post = view_post;
+exports.view_pdf_post = view_pdf_post;
 exports.get_admin_dashboard = get_admin_dashboard;
+exports.get_admin_pdf_dashboard = get_admin_pdf_dashboard;
 exports.get_dashboard = get_dashboard;
 exports.post_delete = post_delete;
 exports.save_post = save_post;

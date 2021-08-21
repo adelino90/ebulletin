@@ -129,19 +129,20 @@ setcontent = function(pagenumber){
 		configMap.dashboard_model.get_admin_post(pagination_data,function(response){
 			var data = {dashboard_data:response.dashboard_data};
 			stateMap.$container.html(Handlebars.templates.post_request(data));
-			stateMap.$container.append(Handlebars.templates.pagination({currentPage:parseInt(page_current),pageCount:response.pagecount,size:5}))
+			stateMap.$container.append(Handlebars.templates.pagination({currentPage:parseInt(page_current),pageCount:response.pagecount,size:10}))
 			setJqueryMap();
 			configMap.activepage=page_current;
 			jqueryMap.$pagination_page.click(change_page);
 			jqueryMap.$view_button.click(viewclicked);
 			
 		})
-
+		
 }
 
 
 
 initModule = function ( $container,id1,id2 ) {
+	
 	stateMap.$container = $container;
 	stateMap.$container.off().empty();
 	configMap.admin_user(function(response){

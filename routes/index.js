@@ -35,6 +35,13 @@ app.post('/get_post',function(req, res) {
 	});
 });
 
+app.post('/get_pdf_post_for_aprroval',function(req, res) {
+	var odata ={id:req.body.id, user_id:req.session.user_ID};
+	model.view_pdf_post(odata,function(data){
+		res.send(data);
+	});
+});
+
 app.post('/view_user',function(req, res) {
 	var id = req.body.id
 	model.view_user(id,function(data){
@@ -259,14 +266,11 @@ app.post('/update_upload',function(req,res){
 
 
 
-
-
-
-
-
 app.post('/approve_request',function(req,res){
 	var id = req.body.id;
-	model.approve_request(id,function(result){
+	var approve_type = 	((req.body.approved_type=='post') ? 'post_tbl' : 'pdf_tbl')
+	var inp_data = {id:id,approve_type:approve_type}
+	model.approve_request(inp_data,function(result){
 			if(result="OK")
 				res.send("OK");
 	})
@@ -327,6 +331,17 @@ app.post('/manage_posts', function(req,res){
 	var user_id = req.session.user_ID;
 	page_number=req.body.page_number;
 	 model.get_admin_dashboard(user_id,page_number,function(ret,pagecount){
+		return_object.dashboard_data=ret;
+		return_object.pagecount=pagecount
+		 res.send(return_object);
+	 })
+});
+
+app.post('/manage_pdf_posts', function(req,res){
+	var return_object={}
+	var user_id = req.session.user_ID;
+	page_number=req.body.page_number;
+	 model.get_admin_pdf_dashboard(user_id,page_number,function(ret,pagecount){
 		return_object.dashboard_data=ret;
 		return_object.pagecount=pagecount
 		 res.send(return_object);

@@ -3,13 +3,13 @@
 						<th>Title</th>
 						<th>File</th>
 					</tr>
-					<tr class="ebulletin_side_content_table_row">
-						<td class = "ebulletin_side_content_content_title">Prog 105 Grades</td>
-						<td class = "ebulletin_side_content_filename">prog_105_grades.pdf</td>
-					</tr>
-					<tr class="ebulletin_side_content_table_row">
-						<td class = "ebulletin_side_content_content_title">Logic 100 Grades</td>
-						<td class = "ebulletin_side_content_filename">logic_100_grades.pdf</td>
 
-					</tr>
+					  {{#each pdf_post_data}}
+							<tr class="ebulletin_side_content_table_row">
+								<td class = "ebulletin_side_content_content_title">{{pdf_title}}</td>
+								<td class = "ebulletin_side_content_filename">{{Files}}</td>
+							</tr>
+					 {{/each}}
+
+
 				</table>

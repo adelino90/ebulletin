@@ -45,14 +45,16 @@ setcontent = function($side_content){
     sethelpers();
     var data_obj= {};
     configMap.e_bulletin_model.get_bulletin(function(response){
-        data_obj.bulletin_data = response
+        data_obj.main_post_data = response.main_post
+        data_obj.pdf_post_data = response.pdf_post
         stateMap.$container.html(Handlebars.templates.home(data_obj));
         setJqueryMap();
         jqueryMap.$side_content=$side_content
-        jqueryMap.$side_content.html(Handlebars.templates.side_content());
+        jqueryMap.$side_content.html(Handlebars.templates.side_content(data_obj));
         jqueryMap.$filename=jqueryMap.$side_content.find('.ebulletin_side_content_filename')
-        jqueryMap.$filename.click(function(){
-            configMap.showpopups.pdfpopup()
+        jqueryMap.$filename.click(function(e){
+           var filename= $(this).text()
+            configMap.showpopups.pdfpopup(filename)
         })
     
     });

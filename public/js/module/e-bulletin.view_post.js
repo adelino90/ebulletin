@@ -43,10 +43,10 @@ helper = function(){
   }
 
 approve_post = function(e){
-	var data = {id:$(this).attr('data-id')};
+	var data = {id:$(this).attr('data-id'),approved_type:'post'};
 		configMap.dashboard_model.approve_request(data,function(response){
 			if(response=="OK")
-			configMap.showpopups.message_popup('Approved!','message','manage_posts',configMap.previous_page_id)
+			configMap.showpopups.message_popup('Approved!','message','admin_manage_main_posts',configMap.previous_page_id)
 			
 
 		})
@@ -65,7 +65,7 @@ setcontent = function(id){
 			jqueryMap.$date_to.datepicker({});
 			jqueryMap.$approve.click(approve_post);
 			jqueryMap.$Reject.click(function(){
-				configMap.change_option_anchor('manage_posts',configMap.previous_page_id,( ( new Date() ).getSeconds() + 10000 ).toString( 36 ))
+				configMap.change_option_anchor('admin_manage_main_posts',configMap.previous_page_id,( ( new Date() ).getSeconds() + 10000 ).toString( 36 ))
 			})
 			jqueryMap.$img_post_image.click(
 				function(e){

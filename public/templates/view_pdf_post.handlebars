@@ -1,0 +1,64 @@
+ 
+
+					<div class="row">
+						<div class ="col-md-6 col-md-offset-3 post_container">
+							<div class="row">
+										<div class ="col-md-12">
+											<div class="form-group">
+													<label for="focusedInput">Title</label>
+													<input class="form-control" id="t_title" type="text" value ="{{pdf_title}}">
+											</div>
+										</div>
+							</div>
+
+
+
+							<div class="row">
+										<div class ="col-md-12">					
+												<div class="form-group">
+														<label for="focusedInput">PDF File</label>
+												
+                                                    <object data="../pdf/{{pdf_filename}}" type="application/pdf">
+                                                        <embed src="../pdf/{{pdf_filename}}" type="application/pdf" />
+                                                </object>
+                                                                                            
+                                                
+                                                
+                                                </div>
+									</div>
+							</div>
+
+							<div class="row">
+										<div class ="col-md-12">	
+												<div class="form-group">
+													<label for="comment">Description:</label>
+													<textarea class="form-control" rows="5" id="description">{{description}}</textarea>
+												</div>
+										</div>
+							</div>
+
+							<div class="row">
+										<div class ="col-md-12">
+											<div class="form-group">
+												<div class="row">
+													<div class="col-md-12">
+														<label for="comment">Posting Date:</label>
+													</div>
+													<div class="col-md-5">
+														<input class="form-control" id="posting_date_from" placeholder="From" value ="{{posting_date_from}}"  type="text">
+													</div>
+													<div class="col-md-5">
+														<input class="form-control" id="posting_date_to" placeholder="To"  value ="{{posting_date_to}}"  type="text">
+													</div>
+												</div>
+											</div>
+					 					</div>
+							</div>
+							<div class="row">
+										<div class ="col-md-12">
+											<button type="button" class="modal__btn" data-id="{{id}}" id = "Approve">Approve</button>
+											<button type="button" class="modal__btn" data-id="{{id}}" id = "Reject">Reject</button>
+										</div>
+							</div>
+					</div>
+				</div>	

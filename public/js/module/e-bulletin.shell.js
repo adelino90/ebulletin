@@ -18,7 +18,7 @@ configMap = {
 	anchor_schema_map : {
 	chat : { opened : true, closed : true , hidden:true },
 	bclick:{click:true},
-	option:{home:true,contact:true,about:true,pdf_post:true,main_post:true,user_menu:true,dashboard:true,sign_out:true,manage_posts:true,admin_manage_main_posts:true,edit_view_post:true,view_post:true,manage_users:true,view_user:true},
+	option:{home:true,contact:true,about:true,pdf_post:true,main_post:true,user_menu:true,dashboard:true,sign_out:true,manage_posts:true,admin_manage_main_posts:true,pdf_post_request:true,edit_view_post:true,view_post:true,get_pdf_post_for_aprroval:true,manage_users:true,view_user:true},
 	 _option : {id : true},
 	 filter:{search:true},
 	 _filter :{search_str:true}
@@ -190,6 +190,10 @@ onHashchange = function ( event ) {
 				ebulletin.post_request.initModule( jqueryMap.$content,anchor_map_proposed._option.id,anchor_map_proposed._option.id2 );
 				//ebulletin.user_menu.initModule( jqueryMap.$content,jqueryMap.$side_content);
 			break;
+			case "pdf_post_request":
+				ebulletin.pdf_post_request.initModule( jqueryMap.$content,anchor_map_proposed._option.id,anchor_map_proposed._option.id2 );
+				//ebulletin.user_menu.initModule( jqueryMap.$content,jqueryMap.$side_content);
+			break;
 			case "dashboard":
 				//ebulletin.dashboard.initModule( jqueryMap.$content,anchor_map_proposed._option.id);
 				ebulletin.user_menu.initModule( jqueryMap.$content,jqueryMap.$side_content);
@@ -215,6 +219,10 @@ onHashchange = function ( event ) {
 			case "view_post":
 				ebulletin.view_post.initModule(jqueryMap.$content,anchor_map_proposed._option.id,anchor_map_proposed._option.id2);
 			break;
+			case "get_pdf_post_for_aprroval":
+				ebulletin.view_pdf_post.initModule(jqueryMap.$content,anchor_map_proposed._option.id,anchor_map_proposed._option.id2);
+			break;
+			
 			case "edit_view_post":
 				ebulletin.edit_view_post.initModule(jqueryMap.$content,anchor_map_proposed._option.id,anchor_map_proposed._option.id2);
 			break;
@@ -367,10 +375,10 @@ showpopups=(function () {
 	   
 		})
 	}
-	pdfpopup=function(){
+	pdfpopup=function(filename){
 		$('body').css('overflow','auto')
 		$('.pdf-modal-popup').css('display','block');
-		$("#pdfframe").attr("src", "../pdf/AJustoResume.pdf");
+		$("#pdfframe").attr("src", "../pdf/"+filename);
 
 		$('#close, .image-modal-popup').click(function(){
 			$('body').css('overflow','auto')
@@ -492,7 +500,19 @@ initModule = function ( $container ) {
 		admin_user  : admin_authorize,
 		dashboard_model  : ebulletin.model.dashboard
 	})
+	ebulletin.pdf_post_request.configModule({
+		change_option_anchor:setOptionAnchor,
+		admin_user  : admin_authorize,
+		dashboard_model  : ebulletin.model.dashboard
+	})
 	ebulletin.view_post.configModule({
+		change_option_anchor:setOptionAnchor,
+		admin_user  : admin_authorize,
+		dashboard_model  : ebulletin.model.dashboard,
+		showpopups:showpopups
+	})
+
+	ebulletin.view_pdf_post.configModule({
 		change_option_anchor:setOptionAnchor,
 		admin_user  : admin_authorize,
 		dashboard_model  : ebulletin.model.dashboard,

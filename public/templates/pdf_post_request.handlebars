@@ -1,0 +1,53 @@
+
+				<div class="col-md-12 ebulletin-post_request-content">
+					<div class="row">
+						<div class="col-md-12 ebulletin-post_request-options">
+							<div class="row">
+								<div class="ebulletin-post_request-options-left">
+									<h4>PDF Post Request Management</h4>
+								</div>
+								<div class="ebulletin-post_request-options-right">
+									<button type="button" class="btn btn-success" data-toggle="modal" data-target="#ebulletin-add-post-container">Add Post</button>
+								</div>
+							</div>
+					
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12 ebulletin-post_request-list">
+							<div class="col-md-12 ">
+								<h4>Posts</h4>
+							</div>
+							<div class = "row">
+								<div class="col-md-12">
+								<table class="table ebulletin-post_request-table">
+									<thead>
+									  <tr>
+										<th>Title</th>
+                                         <th>Posted by</th>
+										<th>Status</th>
+										<th>Date Submitted</th>
+										<th>Action</th>
+									  </tr>
+									</thead>
+									<tbody>
+										   <!-- Data Here -->
+												  {{#each dashboard_data}}
+													<tr>
+															<td>{{pdf_title}}</td>
+															<td>{{poser}}</td>
+															<td><span class="{{status}}">{{status}}</span></td>
+															<td>{{date_submited}}</td>
+															<td class="ebulletin-post_request_action" data-id = "{{id}}">{{#viewed viewed}} {{/viewed}}</td>
+													</tr>
+												{{/each}}
+												<!-- data -->
+									</tbody>
+								  </table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+		
