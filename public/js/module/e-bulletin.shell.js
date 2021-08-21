@@ -330,13 +330,15 @@ setcontent = function($container){
 	$container.html( configMap.main_html );
 	setJqueryMap();
 	ebulletin.model.bulletin_board.get_bulletin(function(response){
-    	data_obj.bulletin_data = response
+		data_obj.main_post_data = response.main_post
+        data_obj.pdf_post_data = response.pdf_post
     	jqueryMap.$content.html(Handlebars.templates.index(data_obj));
-		jqueryMap.$side_content.html(Handlebars.templates.side_content());
+		jqueryMap.$side_content.html(Handlebars.templates.side_content(ata_obj));
 		showpopups.init(jqueryMap.$body)
 		jqueryMap.$filename=$container.find('.ebulletin_side_content_filename')
-        jqueryMap.$filename.click(function(){
-            showpopups.pdfpopup()
+        jqueryMap.$filename.click(function(e){
+			var filename= $(this).text()
+            showpopups.pdfpopup(filename)
         })
     
 
