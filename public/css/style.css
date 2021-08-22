@@ -182,3 +182,15 @@ background: #FFA07A;
   .main_post_menu:hover:after {
     height: 100%;
   }
+
+
+  .invalid-feedback{
+    color: rgb(231, 90, 90);
+  }
+
+  .input_invalid{
+    border-color: #dc3545;
+    background-repeat: no-repeat;
+    background-position: right calc(.375em + .1875rem) center;
+    background-size: calc(.75em + .375rem) calc(.75em + .375rem);
+  }

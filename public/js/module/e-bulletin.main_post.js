@@ -14,7 +14,7 @@ configMap = {
 },
 stateMap = {$container : undefined, anchor_map : {} ,resize_idto : undefined },
 jqueryMap = {},
-setHelper,setJqueryMap,configModule,viewclicked,clearvals,data_validation,getdate_now,for_delete,refresh_dashboard,change_page,setcontent,onsubmit,onsubmit2,ondashboard_delete, initModule;
+setHelper,setJqueryMap,configModule,viewclicked,remove_errors,clearvals,data_validation,getdate_now,for_delete,refresh_dashboard,change_page,setcontent,onsubmit,onsubmit2,ondashboard_delete, initModule;
 
 // Begin DOM method /setJqueryMap/
 setJqueryMap = function () {
@@ -160,7 +160,56 @@ refresh_dashboard=function(pageto){
 }
 data_validation=function(data_obj,callback){
 	var for_validation=data_obj
+	var flag=true,validImageTypes = ['image/gif', 'image/jpeg', 'image/png'];
 	
+	remove_errors();
+	if(for_validation.description ==""){
+		jqueryMap.$description.addClass("input_invalid")
+		jqueryMap.$description.next(".invalid-feedback").text("Please Enter Description")
+		flag=false;
+		}
+	
+	if(for_validation.title ==""){
+		jqueryMap.$title.addClass("input_invalid")
+		jqueryMap.$title.next(".invalid-feedback").text("Please Enter Title")	
+		flag=false;
+	}
+	
+	if(for_validation.f_file== "undefined"){
+		jqueryMap.$f_file.addClass("input_invalid")
+		jqueryMap.$f_file.next(".invalid-feedback").text("Please Enter Image")	
+		flag=false;
+	}
+	if($.inArray(for_validation.f_file.type, validImageTypes) < 0){
+		jqueryMap.$f_file.addClass("input_invalid")
+		jqueryMap.$f_file.next(".invalid-feedback").text("Invalid File Type: Please Upload the Image File Only")
+		flag = false
+	}
+
+	if(for_validation.subject ==""){
+		jqueryMap.$subject.addClass("input_invalid")
+		jqueryMap.$subject.next(".invalid-feedback").text("Please Enter Post Subject")	
+		flag=false;
+	}
+	if(for_validation.date_from ==""){
+		jqueryMap.$date_from.addClass("input_invalid")
+		jqueryMap.$date_from.next(".invalid-feedback").text("Please Enter Posting Date From")	
+		flag=false;
+	}
+	if(for_validation.date_to ==""){
+		jqueryMap.$date_to.addClass("input_invalid")
+		jqueryMap.$date_to.next(".invalid-feedback").text("Please Enter  Posting Date To")	
+		flag=false;
+	}
+	if(new Date(for_validation.date_from) > new Date(for_validation.date_to)){
+		jqueryMap.$date_to.addClass("input_invalid")
+		jqueryMap.$date_to.next(".invalid-feedback").text("Date To Must be ahead of Date From")
+		jqueryMap.$date_from.addClass("input_invalid")
+		jqueryMap.$date_from.next(".invalid-feedback").text("Date To Must be ahead of Date From")
+		flag = false
+	}
+	
+
 	/*
 	date_from: "2021/07/31"
 	date_to: "2021/07/31"
@@ -169,7 +218,7 @@ data_validation=function(data_obj,callback){
 	subject: "12361346"
 	title: "12351235"
 	*/
-	callback(for_validation)
+	callback(flag)
 }
 
 onsubmit = function(){
@@ -185,29 +234,45 @@ onsubmit = function(){
 		data_for_validation[pair[0]]=pair[1];
 	 }
 	 data_validation(data_for_validation,function(data){
-		console.log(data);
-	 
-		configMap.dashboard_model.submitdata(form,function(returnobject){
-			jqueryMap.$success_div.html('<div class="alert alert-success">'+returnobject.insert_status+'</div>');
-			setTimeout(function(){
 
-				jqueryMap.$modal_add_post.modal("hide");
-					refresh_dashboard();
-					
-			}, 1500);	
+		if(data){
+		 
+			configMap.dashboard_model.submitdata(form,function(returnobject){
+				jqueryMap.$success_div.html('<div class="alert alert-success">'+returnobject.insert_status+'</div>');
+				setTimeout(function(){
 
-		});
+					jqueryMap.$modal_add_post.modal("hide");
+						refresh_dashboard();
+						
+				}, 1500);	
+
+			});
+
+		}
 	});
 
 }
 
+remove_errors=function(){
+	jqueryMap.$title.removeClass("input_invalid")
+	jqueryMap.$f_file.removeClass("input_invalid")
+	jqueryMap.$subject.removeClass("input_invalid")
+	jqueryMap.$description.removeClass("input_invalid")
+	jqueryMap.$date_from.removeClass("input_invalid")
+	jqueryMap.$date_to.removeClass("input_invalid")
+	$('.invalid-feedback').text("");
+}
+
 clearvals = function(){
+	
 	jqueryMap.$title.val("");
 	jqueryMap.$f_file.val("");
 	jqueryMap.$subject.val("");
 	jqueryMap.$description.val("");
 	jqueryMap.$date_from.val("");
 	jqueryMap.$date_to.val("");
+	jqueryMap.$success_div.off().empty();
+
 }
 
 for_delete = function(e){
@@ -218,11 +283,11 @@ for_delete = function(e){
 		var message = "Are you sure you want to delete \""+title+"\"?";
 		
 		value.post_id = post_id;
-		configMap.showpopups.message_popup(message,'delete');
+		var for_confirmation=configMap.showpopups.message_popup(message,'delete');
 		
-		jqueryMap.$pop_up_container.find(".confirm").click(function(){
+		for_confirmation.$pop_up_container.find(".confirm").click(function(){
 			ondashboard_delete(value.post_id,tr)
-			jqueryMap.$pop_up_container.fadeOut("slow")
+			for_confirmation.$pop_up_container.fadeOut("slow")
 		});	
 
 }

@@ -421,6 +421,7 @@ showpopups=(function () {
 			$message_popup_components.$pop_up_container.fadeOut("slow")
 
 		})
+	return $message_popup_components;
 		
 	}
 

@@ -15,7 +15,7 @@ settable_map : {dashboard_model:true,change_option_anchor:true,authorize_user:tr
 },
 stateMap = {$container : undefined, anchor_map : {} ,resize_idto : undefined },
 jqueryMap = {},
-setHelper,setJqueryMap,configModule,change_page,clearvals,pdf_submit,setcontent,refresh_pdf_dashboard, initModule;
+setHelper,setJqueryMap,configModule,remove_errors,change_page,for_delete,clearvals,data_validation,pdf_submit,setcontent,refresh_pdf_dashboard, initModule;
 
 // Begin DOM method /setJqueryMap/
 setJqueryMap = function () {
@@ -32,6 +32,7 @@ jqueryMap = {
 			$modal_add_post: $container.find("#ebulletin-add-post-container"),
 			$pagination:$container.find('.pagination-wrapper'),
 			$pagination_page:$container.find('.page-numbers'),
+			$delete_button : $container.find('.ebulletin-dashboard-delete'),
 			$ebulletin_pdf_dashboard_table:$container.find(".ebulletin-pdf-dashboard-table > tbody")
 
 
@@ -137,6 +138,62 @@ refresh_pdf_dashboard=function(pageto){
 
 }
 
+data_validation = function(data_obj,callback){
+	var for_validation=data_obj
+	var flag=true
+	
+	remove_errors();
+	if(for_validation.pdf_title ==""){
+		jqueryMap.$t_pdf_title.addClass("input_invalid")
+		jqueryMap.$t_pdf_title.next(".invalid-feedback").text("Please Enter Title")
+		flag = false
+	}
+
+	if(for_validation.filename == "undefined"){
+		jqueryMap.$f_pdf_file.addClass("input_invalid")
+		jqueryMap.$f_pdf_file.next(".invalid-feedback").text("Please Upload the PDF File")
+		flag = false
+	}
+	if(for_validation.filename.type != 'application/pdf'){
+		jqueryMap.$f_pdf_file.addClass("input_invalid")
+		jqueryMap.$f_pdf_file.next(".invalid-feedback").text("Invalid File Type: Please Upload PDF File Only")
+		flag = false
+	}
+	if(for_validation.description ==""){
+		jqueryMap.$description.addClass("input_invalid")
+		jqueryMap.$description.next(".invalid-feedback").text("Please Enter Description")
+		flag = false
+	}
+	if(for_validation.date_from ==""){
+		jqueryMap.$posting_date_from.addClass("input_invalid")
+		jqueryMap.$posting_date_from.next(".invalid-feedback").text("Please Enter Date From")
+		flag = false
+	}
+	if(for_validation.date_to ==""){
+		jqueryMap.$posting_date_to.addClass("input_invalid")
+		jqueryMap.$posting_date_to.next(".invalid-feedback").text("Please Enter Posting Date To")
+		flag = false
+	}
+	if(new Date(for_validation.date_from) > new Date(for_validation.date_to)){
+		jqueryMap.$posting_date_to.addClass("input_invalid")
+		jqueryMap.$posting_date_to.next(".invalid-feedback").text("Date To Must be ahead of Date From")
+		jqueryMap.$posting_date_from.addClass("input_invalid")
+		jqueryMap.$posting_date_from.next(".invalid-feedback").text("Date To Must be ahead of Date From")
+		flag = false
+	}
+	
+
+	callback(flag)
+}
+
+remove_errors=function(){
+	jqueryMap.$t_pdf_title.removeClass("input_invalid")
+	jqueryMap.$f_pdf_file.removeClass("input_invalid")
+	jqueryMap.$description.removeClass("input_invalid")
+	jqueryMap.$posting_date_from.removeClass("input_invalid")
+	jqueryMap.$posting_date_to.removeClass("input_invalid")
+	$('.invalid-feedback').text("");
+}
 clearvals = function(){
 	jqueryMap.$t_pdf_title.val("")
 	jqueryMap.$f_pdf_file.val("");
@@ -156,21 +213,38 @@ pdf_submit = function(e){
 	for(var pair of form.entries()) {
 		data_for_validation[pair[0]]=pair[1];
 	 }
-		configMap.dashboard_model.submitpdfdata(form,function(returnobject){
-			jqueryMap.$success_div.html('<div class="alert alert-success">'+returnobject.insert_status+'</div>');
-			setTimeout(function(){
 
-				jqueryMap.$modal_add_post.modal("hide");
-					refresh_pdf_dashboard();
-					
-			}, 1500);
-			
+	 data_validation(data_for_validation,function(data){
+		if(data){
+			configMap.dashboard_model.submitpdfdata(form,function(returnobject){
+				jqueryMap.$success_div.html('<div class="alert alert-success">'+returnobject.insert_status+'</div>');
+				setTimeout(function(){
 
-		});
+					jqueryMap.$modal_add_post.modal("hide");
+						refresh_pdf_dashboard();
+						
+				}, 1500);
+				
+
+			});
+		}
+	});
+
 	
 
 }
-// This is A Test
+for_delete = function(e){
+	var value={},tr = $(this);
+	var title= $(this).parent().parent().find(".pdf_title").html()
+	var pdf_id = e.target.attributes[1].value;
+	var message = "Are you sure you want to delete \""+title+"\"?";
+	value.pdf_id = pdf_id;
+	var for_confirmation=configMap.showpopups.message_popup(message,'delete');/*
+	for_confirmation.$pop_up_container.find(".confirm").click(function(){
+		ondashboard_delete(value.post_id,tr)
+		for_confirmation.$pop_up_container.fadeOut("slow")
+	});	*/
+}
 
 setcontent = function(pagenumber,limit){
     var page_current = (pagenumber=="ebulletin")?1:pagenumber;
@@ -188,6 +262,7 @@ setcontent = function(pagenumber,limit){
 		jqueryMap.$posting_date_from.datepicker({});
 		jqueryMap.$posting_date_to.datepicker({});
        	jqueryMap.$pdf_submit.click(pdf_submit)
+		jqueryMap.$delete_button.click(for_delete);
 
     })
 }
