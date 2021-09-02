@@ -82,6 +82,28 @@ save_post = function(data,callback){
 
 
 
+update_pdf_post = function(data,callback){
+
+	sql.close();
+				const request = new sql.Request(gpool)
+				.input('pdf_id', sql.Int, data.post_id)
+				.input('pdf_title', sql.NVarChar, data.pdf_title)
+				.input('pdf_filename', sql.NVarChar, data.pdf_filename)
+				.input('description', sql.NVarChar, data.description)
+				.input('pdate_from', sql.NVarChar, data.date_from)
+				.input('pdate_to',  sql.NVarChar,data.date_to)
+				request.execute('update_user_pdf_post', (err, result) => {
+					result.recorded=true;
+				callback(result);
+			}).on('error', err => {
+				console.log(err)
+				callback(err)
+		 })
+		
+		 
+}
+
+
 save_pdf_post = function(data,callback){
 
 	sql.close();
@@ -97,13 +119,11 @@ save_pdf_post = function(data,callback){
 					result.recorded=true;
 
 				callback(result);
-			// ... 
 			}).on('error', err => {
 				console.log(err)
 				callback(err)
 		 })
-		// var result={recorded:true};
-		 //callback(result);
+		
 		 
 }
 
@@ -322,6 +342,16 @@ view_pdf_post = function(data,callback){
 	})
 
 }
+edit_view_pdf_post = function(data,callback){
+	var id = data.id
+	sql.close();
+	const request2 = new sql.Request(gpool)
+		request2.input('id', sql.Int, id)
+		request2.execute('view_pdf_post', (err, result) => {
+  
+		callback(result.recordset);
+	})
+}
 
 
 update_user = function(data,callback){
@@ -428,6 +458,7 @@ exports.get_dashboard = get_dashboard;
 exports.post_delete = post_delete;
 exports.save_post = save_post;
 exports.save_pdf_post = save_pdf_post;
+exports.update_pdf_post = update_pdf_post;
 exports.update_post = update_post;
 exports.get_navigation = get_navigation;
 exports.login = login;
@@ -435,3 +466,4 @@ exports.get_all_users = get_all_users;
 exports.view_user = view_user;
 exports.get_bulletin = get_bulletin;
 exports.get_pdf_post = get_pdf_post;
+exports.edit_view_pdf_post = edit_view_pdf_post;

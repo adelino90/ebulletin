@@ -8,14 +8,14 @@ configMap = {
 
 authorize_user:null,
 change_option_anchor:null,
-dashboard_model :null,
+pdf_model :null,
 showpopups:null,	
 activepage:null,
-settable_map : {dashboard_model:true,change_option_anchor:true,authorize_user:true,showpopups:true}
+settable_map : {pdf_model:true,change_option_anchor:true,authorize_user:true,showpopups:true}
 },
 stateMap = {$container : undefined, anchor_map : {} ,resize_idto : undefined },
 jqueryMap = {},
-setHelper,setJqueryMap,configModule,remove_errors,change_page,for_delete,clearvals,data_validation,pdf_submit,setcontent,refresh_pdf_dashboard, initModule;
+setHelper,setJqueryMap,configModule,remove_errors,viewclicked,change_page,setEvents,for_delete,clearvals,data_validation,pdf_submit,setcontent,refresh_pdf_dashboard, initModule;
 
 // Begin DOM method /setJqueryMap/
 setJqueryMap = function () {
@@ -29,6 +29,7 @@ jqueryMap = {
 			$posting_date_from:$container.find("#posting_date_from"),
 			$posting_date_to:$container.find("#posting_date_to"),
 			$success_div:$container.find("#success_div"),
+			$edit_button : $container.find('.ebulletin-pdf-edit'),
 			$modal_add_post: $container.find("#ebulletin-add-post-container"),
 			$pagination:$container.find('.pagination-wrapper'),
 			$pagination_page:$container.find('.page-numbers'),
@@ -114,7 +115,15 @@ change_page=function(e){
 
 }
 
-
+setEvents =function(){
+	jqueryMap.$pagination_page.click(change_page);
+	$.fn.datepicker.defaults.format = "yyyy/mm/dd";
+	jqueryMap.$posting_date_from.datepicker({});
+	jqueryMap.$posting_date_to.datepicker({});
+	jqueryMap.$edit_button.click(viewclicked);
+	jqueryMap.$pdf_submit.click(pdf_submit)
+	jqueryMap.$delete_button.click(for_delete);
+}
 refresh_pdf_dashboard=function(pageto){
 	jqueryMap.$ebulletin_pdf_dashboard_table.off().empty();
 	jqueryMap.$pagination.remove();
@@ -124,20 +133,23 @@ refresh_pdf_dashboard=function(pageto){
 	pagination_data.page_number=page_current;
 	setHelper();
 	
-		configMap.dashboard_model.get_pdf_post(pagination_data,function(pdf_dashboard_response){
+		configMap.pdf_model.get_pdf_post(pagination_data,function(pdf_dashboard_response){
 			jqueryMap.$ebulletin_pdf_dashboard_table.html(Handlebars.templates.pdf_dashboard_data({dashboard_data:pdf_dashboard_response.dashboard_data}));
 			configMap.showpopups.init(stateMap.$container);
 			stateMap.$container.append(Handlebars.templates.pagination({currentPage:parseInt(page_current),pageCount:pdf_dashboard_response.pagecount,size:5}))
 			setJqueryMap();
 			clearvals();
-			$.fn.datepicker.defaults.format = "yyyy/mm/dd";
-			jqueryMap.$pagination_page.click(change_page);
+			setEvents();
 			configMap.activepage=page_current;
 			
 		});
 
 }
-
+viewclicked = function(){
+	var post_id = $(this).attr('data-id');
+	configMap.change_option_anchor('edit_pdf_post',post_id,configMap.activepage);
+	
+}
 data_validation = function(data_obj,callback){
 	var for_validation=data_obj
 	var flag=true
@@ -216,7 +228,7 @@ pdf_submit = function(e){
 
 	 data_validation(data_for_validation,function(data){
 		if(data){
-			configMap.dashboard_model.submitpdfdata(form,function(returnobject){
+			configMap.pdf_model.submitpdfdata(form,function(returnobject){
 				jqueryMap.$success_div.html('<div class="alert alert-success">'+returnobject.insert_status+'</div>');
 				setTimeout(function(){
 
@@ -248,21 +260,17 @@ for_delete = function(e){
 
 setcontent = function(pagenumber,limit){
     var page_current = (pagenumber=="ebulletin")?1:pagenumber;
+	configMap.activepage = (parseInt(pagenumber)==false)?1:pagenumber;
     var pagination_data={}
     pagination_data.page_number=page_current;
     setHelper();
 
-    configMap.dashboard_model.get_pdf_post(pagination_data,function(pdf_dashboard_response){
+    configMap.pdf_model.get_pdf_post(pagination_data,function(pdf_dashboard_response){
         if(pagenumber>pdf_dashboard_response.pagecount)configMap.change_option_anchor('pdf_post',1,( ( new Date() ).getSeconds() + 10000 ).toString( 36 ))
         stateMap.$container.html(Handlebars.templates.pdf_post_dashboard({dashboard_data:pdf_dashboard_response.dashboard_data}));
         stateMap.$container.append(Handlebars.templates.pagination({currentPage:parseInt(page_current),pageCount:pdf_dashboard_response.pagecount,size:5}))
 		setJqueryMap();
-		jqueryMap.$pagination_page.click(change_page);
-		$.fn.datepicker.defaults.format = "yyyy/mm/dd";
-		jqueryMap.$posting_date_from.datepicker({});
-		jqueryMap.$posting_date_to.datepicker({});
-       	jqueryMap.$pdf_submit.click(pdf_submit)
-		jqueryMap.$delete_button.click(for_delete);
+		setEvents();
 
     })
 }

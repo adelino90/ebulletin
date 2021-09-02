@@ -18,7 +18,8 @@ configMap = {
 	anchor_schema_map : {
 	chat : { opened : true, closed : true , hidden:true },
 	bclick:{click:true},
-	option:{home:true,contact:true,about:true,pdf_post:true,main_post:true,user_menu:true,dashboard:true,sign_out:true,manage_posts:true,admin_manage_main_posts:true,pdf_post_request:true,edit_view_post:true,view_post:true,get_pdf_post_for_aprroval:true,manage_users:true,view_user:true},
+	option:{home:true,contact:true,about:true,pdf_post:true,main_post:true,user_menu:true,dashboard:true,sign_out:true,manage_posts:true,admin_manage_main_posts:true,pdf_post_request:true,
+			edit_view_post:true,edit_pdf_post:true,view_post:true,get_pdf_post_for_aprroval:true,manage_users:true,view_user:true},
 	 _option : {id : true},
 	 filter:{search:true},
 	 _filter :{search_str:true}
@@ -225,6 +226,9 @@ onHashchange = function ( event ) {
 			
 			case "edit_view_post":
 				ebulletin.edit_view_post.initModule(jqueryMap.$content,anchor_map_proposed._option.id,anchor_map_proposed._option.id2);
+			break;
+			case "edit_pdf_post":
+				ebulletin.edit_pdf_post.initModule(jqueryMap.$content,anchor_map_proposed._option.id,anchor_map_proposed._option.id2);
 			break;
 			case "manage_users":
 				ebulletin.users.initModule( jqueryMap.$content );
@@ -540,10 +544,10 @@ initModule = function ( $container ) {
 	ebulletin.pdf_post.configModule({
 		change_option_anchor:setOptionAnchor,
 		authorize_user  : user_authorize,
-		dashboard_model  : ebulletin.model.dashboard,
+		pdf_model  : ebulletin.model.dashboard,
 		showpopups:showpopups
 	})
-
+	
 	ebulletin.view_user.configModule({
 		change_option_anchor:setOptionAnchor,
 		admin_user  : admin_authorize,
@@ -553,6 +557,12 @@ initModule = function ( $container ) {
 		change_option_anchor:setOptionAnchor,
 		admin_user  : user_authorize,
 		dashboard_model  : ebulletin.model.dashboard,
+		showpopups:showpopups
+	})
+	ebulletin.edit_pdf_post.configModule({
+		change_option_anchor:setOptionAnchor,
+		admin_user  : user_authorize,
+		pdf_model  : ebulletin.model.pdf,
 		showpopups:showpopups
 	})
 	ebulletin.home.configModule({

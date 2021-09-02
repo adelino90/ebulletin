@@ -16,7 +16,7 @@ padding:10px 30px 10px 30px;
 .modal-header .close{
 	color:#fff;
 }
-.ebulletin-dashboard-edit:hover{
+.ebulletin-dashboard-edit:hover,.ebulletin-pdf-edit:hover{
 color: #66ff33;
 }
 .pending{

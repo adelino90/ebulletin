@@ -1,6 +1,6 @@
 ebulletin.model = (function () {
   'use strict';
-  var curryFetchData,curryStoreData,navigation,about,contact,account,dashboard,bulletin_board,curryUploadData;
+  var curryFetchData,curryStoreData,navigation,about,contact,account,pdf,dashboard,bulletin_board,curryUploadData;
   
   
   
@@ -95,7 +95,30 @@ contact= (function(){
     }
    }());
 
+pdf =  (function(){
+   var submitpdfdata,update_pdf_post,update_pdf_post2,edit_view_pdf_post,get_pdf_post,get_pdf_post_for_aprroval 
+
+   submitpdfdata = curryUploadData("/insert_pdf_post");
+   update_pdf_post = curryUploadData("/update_pdf_post");
+   update_pdf_post2 = curryStoreData("/update_pdf_post");
+   edit_view_pdf_post = curryStoreData("edit_view_pdf_post")
+   get_pdf_post_for_aprroval =  curryStoreData("/get_pdf_post_for_aprroval"); 
+   get_pdf_post = curryStoreData("/get_pdf_post");
+
+  return {
+      submitpdfdata:submitpdfdata,
+      get_pdf_post_for_aprroval:get_pdf_post_for_aprroval,
+      get_pdf_post:get_pdf_post,
+      edit_view_pdf_post:edit_view_pdf_post,
+      update_pdf_post:update_pdf_post,
+      update_pdf_post2:update_pdf_post2
+      }
+  
+     }());
+
+
 dashboard = (function(){
+  
   
    var submitdata,submitpdfdata,get_dashboard,get_pdf_post,get_pdf_post_for_aprroval,delete_post,get_admin_post,get_admin_pdf_post,get_post,approve_request,get_users,update_upload,update_upload2;
 
@@ -151,6 +174,7 @@ navigation = (function(){
     about      :about,
     account     :account,
     dashboard   :dashboard,
-    bulletin_board :bulletin_board
+    bulletin_board :bulletin_board,
+    pdf:pdf
   };
   }());

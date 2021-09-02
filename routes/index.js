@@ -42,6 +42,14 @@ app.post('/get_pdf_post_for_aprroval',function(req, res) {
 	});
 });
 
+
+app.post('/edit_view_pdf_post',function(req, res) {
+	var odata ={id:req.body.id};
+	model.edit_view_pdf_post(odata,function(data){
+		res.send(data);
+	});
+});
+
 app.post('/view_user',function(req, res) {
 	var id = req.body.id
 	model.view_user(id,function(data){
@@ -214,6 +222,48 @@ app.post('/insert_pdf_post',function(req,res){
    
 
   });
+	
+});
+app.post('/update_pdf_post',function(req,res){
+
+	
+	var sampleFile = req.body.f_file!== "" ? req.files.f_file:null;
+	var filename = req.body.f_file!== "" ? req.files.f_file.name:null;
+
+	 
+	 var odata = {};
+	 odata.post_id = req.body.post_id;
+	 odata.pdf_title = req.body.pdf_title;
+	 odata.pdf_filename = filename;
+	 odata.description = req.body.description;
+	 odata.date_from = req.body.date_from;
+	 odata.date_to = req.body.date_to;
+	 model.update_pdf_post(odata,function(rdata){
+
+		if(filename!==null){
+			sampleFile.mv('./public/pdf/'+filename+'', function(err) {
+	
+				if(rdata.recorded){
+				rdata.insert_status="Success";
+					res.send(rdata);
+				}
+
+				if (err)
+					console.log(err)
+
+			});
+		}
+		else{
+			if(rdata.recorded){
+				rdata.insert_status="Success";
+				res.send(rdata);
+			}
+		}
+
+	 })
+   
+
+ 
 	
 });
 

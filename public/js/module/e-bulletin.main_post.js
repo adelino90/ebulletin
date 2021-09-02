@@ -14,7 +14,7 @@ configMap = {
 },
 stateMap = {$container : undefined, anchor_map : {} ,resize_idto : undefined },
 jqueryMap = {},
-setHelper,setJqueryMap,configModule,viewclicked,remove_errors,clearvals,data_validation,getdate_now,for_delete,refresh_dashboard,change_page,setcontent,onsubmit,onsubmit2,ondashboard_delete, initModule;
+setHelper,setJqueryMap,configModule,viewclicked,remove_errors,clearvals,data_validation,setEvents,getdate_now,for_delete,refresh_dashboard,change_page,setcontent,onsubmit,onsubmit2,ondashboard_delete, initModule;
 
 // Begin DOM method /setJqueryMap/
 setJqueryMap = function () {
@@ -149,10 +149,7 @@ refresh_dashboard=function(pageto){
 			stateMap.$container.append(Handlebars.templates.pagination({currentPage:parseInt(page_current),pageCount:dashboard_response.pagecount,size:5}))
 			setJqueryMap();
 			clearvals();
-			$.fn.datepicker.defaults.format = "yyyy/mm/dd";
-			jqueryMap.$delete_button.click(for_delete);
-			jqueryMap.$edit_button.click(viewclicked);
-			jqueryMap.$pagination_page.click(change_page);
+			setEvents();
 			configMap.activepage=page_current;
 			
 		});
@@ -317,6 +314,15 @@ change_page=function(e){
 	}
 
 }
+setEvents = function(){
+	$.fn.datepicker.defaults.format = "yyyy/mm/dd";
+	jqueryMap.$date_from.datepicker({});
+	jqueryMap.$date_to.datepicker({});
+	jqueryMap.$submit.click(onsubmit);
+	jqueryMap.$delete_button.click(for_delete);
+	jqueryMap.$edit_button.click(viewclicked);
+	jqueryMap.$pagination_page.click(change_page);
+}
 
 setcontent = function(pagenumber,limit){
 
@@ -332,13 +338,7 @@ setHelper();
 			configMap.showpopups.init(stateMap.$container);
 			stateMap.$container.append(Handlebars.templates.pagination({currentPage:parseInt(page_current),pageCount:dashboard_response.pagecount,size:5}))
 			setJqueryMap();
-			$.fn.datepicker.defaults.format = "yyyy/mm/dd";
-			jqueryMap.$date_from.datepicker({});
-			jqueryMap.$date_to.datepicker({});
-			jqueryMap.$submit.click(onsubmit);
-			jqueryMap.$delete_button.click(for_delete);
-			jqueryMap.$edit_button.click(viewclicked);
-			jqueryMap.$pagination_page.click(change_page);
+			setEvents();
 			configMap.activepage=page_current;
 			$('body').css("opacity", "1.0");
 			

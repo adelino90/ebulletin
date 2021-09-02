@@ -79,6 +79,41 @@ templates['dropdown_options'] = template({"1":function(container,depth0,helpers,
     + ((stack1 = (helpers.list || (depth0 && depth0.list) || alias2).call(alias1,(depth0 != null ? depth0.dropdown : depth0),{"name":"list","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "\n\n		  </ul>\n					        </div>";
 },"useData":true});
+templates['edit_view_pdf_post'] = template({"1":function(container,depth0,helpers,partials,data) {
+    var helper;
+
+  return "													\r\n													<button type=\"button\" class=\"modal__btn\" data-id=\""
+    + container.escapeExpression(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : {},{"name":"id","hash":{},"data":data}) : helper)))
+    + "\" id = \"Cancel\">Cancel</button>	\r\n												   \r\n";
+},"3":function(container,depth0,helpers,partials,data) {
+    var helper, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
+
+  return "													<button type=\"button\" class=\"modal__btn\" data-id=\""
+    + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
+    + "\" id = \"Save\">Save</button>\r\n													<button type=\"button\" class=\"modal__btn\" data-id=\""
+    + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
+    + "\" id = \"Cancel\">Cancel</button>	\r\n";
+},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    var stack1, helper, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
+
+  return " \r\n\r\n					<div class=\"row\">\r\n						<div class =\"col-md-6 col-md-offset-3 post_container\">\r\n							<div class=\"row\">\r\n										<div class =\"col-md-12\">\r\n											<div class=\"form-group\">\r\n													<label for=\"focusedInput\">Title</label>\r\n													<input class=\"form-control\" id=\"t_title\" type=\"text\" value =\""
+    + alias4(((helper = (helper = helpers.pdf_title || (depth0 != null ? depth0.pdf_title : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"pdf_title","hash":{},"data":data}) : helper)))
+    + "\">\r\n													  <div class=\"invalid-feedback\">\r\n								\r\n								  					  </div>\r\n											</div>\r\n										</div>\r\n							</div>\r\n\r\n\r\n\r\n							<div class=\"row\">\r\n										<div class =\"col-md-12\">					\r\n												<div class=\"form-group\">\r\n														<label for=\"focusedInput\">PDF File</label>\r\n												\r\n                                                    <object id=\"pdf_embed\" data=\"../pdf/"
+    + alias4(((helper = (helper = helpers.pdf_filename || (depth0 != null ? depth0.pdf_filename : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"pdf_filename","hash":{},"data":data}) : helper)))
+    + "\" type=\"application/pdf\">\r\n                                                        <embed  src=\"../pdf/"
+    + alias4(((helper = (helper = helpers.pdf_filename || (depth0 != null ? depth0.pdf_filename : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"pdf_filename","hash":{},"data":data}) : helper)))
+    + "\" type=\"application/pdf\" />\r\n                                                	</object>\r\n													<button type=\"button\" class=\"modal__btn\" id=\"toggle-btn\"\r\n  														data-toggle=\"collapse\" data-target=\"#toggle-example\">Upload New File</button>\r\n													<div id=\"toggle-example\" class=\"collapse out\">\r\n													<input class=\"form-control\" id=\"f_file\" type=\"file\" value =\""
+    + alias4(((helper = (helper = helpers.pdf_filename || (depth0 != null ? depth0.pdf_filename : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"pdf_filename","hash":{},"data":data}) : helper)))
+    + "\">\r\n												 		<div class=\"invalid-feedback\">\r\n								\r\n								  					 	 </div>\r\n													 </div>	\r\n                                                                                            \r\n                                                \r\n                                                \r\n                                                </div>\r\n									</div>\r\n							</div>\r\n\r\n							<div class=\"row\">\r\n										<div class =\"col-md-12\">	\r\n												<div class=\"form-group\">\r\n													<label for=\"comment\">Description:</label>\r\n													<textarea class=\"form-control\" rows=\"5\" id=\"description\">"
+    + alias4(((helper = (helper = helpers.description || (depth0 != null ? depth0.description : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"description","hash":{},"data":data}) : helper)))
+    + "</textarea>\r\n													<div class=\"invalid-feedback\">\r\n								\r\n								  					</div>\r\n												</div>\r\n										</div>\r\n							</div>\r\n\r\n							<div class=\"row\">\r\n										<div class =\"col-md-12\">\r\n											<div class=\"form-group\">\r\n												<div class=\"row\">\r\n													<div class=\"col-md-12\">\r\n														<label for=\"comment\">Posting Date:</label>\r\n														\r\n													</div>\r\n													<div class=\"col-md-5\">\r\n														<input class=\"form-control\" id=\"posting_date_from\" placeholder=\"From\" value =\""
+    + alias4(((helper = (helper = helpers.posting_date_from || (depth0 != null ? depth0.posting_date_from : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"posting_date_from","hash":{},"data":data}) : helper)))
+    + "\"  type=\"text\">\r\n														<div class=\"invalid-feedback\">\r\n								\r\n								  						</div>\r\n													</div>\r\n													<div class=\"col-md-5\">\r\n														<input class=\"form-control\" id=\"posting_date_to\" placeholder=\"To\"  value =\""
+    + alias4(((helper = (helper = helpers.posting_date_to || (depth0 != null ? depth0.posting_date_to : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"posting_date_to","hash":{},"data":data}) : helper)))
+    + "\"  type=\"text\">\r\n														<div class=\"invalid-feedback\">\r\n								\r\n								  						</div>\r\n													</div>\r\n												</div>\r\n											</div>\r\n					 					</div>\r\n							</div>\r\n							<div class=\"row\">\r\n										<div class =\"col-md-12\">\r\n"
+    + ((stack1 = helpers["if"].call(alias1,(helpers.eq || (depth0 && depth0.eq) || alias2).call(alias1,(depth0 != null ? depth0.status : depth0),{"name":"eq","hash":{},"data":data}),{"name":"if","hash":{},"fn":container.program(1, data, 0),"inverse":container.program(3, data, 0),"data":data})) != null ? stack1 : "")
+    + "										</div>\r\n							</div>\r\n					</div>\r\n				</div>	";
+},"useData":true});
 templates['edit_view_post'] = template({"1":function(container,depth0,helpers,partials,data) {
     var helper;
 
@@ -260,7 +295,7 @@ templates['pdf_post_dashboard'] = template({"1":function(container,depth0,helper
     + alias4(((helper = (helper = helpers.pdf_filename || (depth0 != null ? depth0.pdf_filename : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"pdf_filename","hash":{},"data":data}) : helper)))
     + "</span></td>\r\n														<td>"
     + alias4(((helper = (helper = helpers.datesubmitted || (depth0 != null ? depth0.datesubmitted : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"datesubmitted","hash":{},"data":data}) : helper)))
-    + "</td>\r\n														<td><i class=\"fa fa-pencil-square-o ebulletin-dashboard-edit\" data-id="
+    + "</td>\r\n														<td><i class=\"fa fa-pencil-square-o ebulletin-pdf-edit\" data-id="
     + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
     + "></i>&nbsp;<i class=\"fa fa-trash ebulletin-dashboard-delete\" data-id="
     + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
