@@ -367,15 +367,15 @@ templates['post_request'] = template({"1":function(container,depth0,helpers,part
 templates['side_content'] = template({"1":function(container,depth0,helpers,partials,data) {
     var helper, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
 
-  return "							<tr class=\"ebulletin_side_content_table_row\">\r\n								<td class = \"ebulletin_side_content_content_title\">"
+  return "							<tr class=\"ebulletin_side_content_table_row\">\r\n								<td class = \"ebulletin_side_content_content_title\">\r\n									"
     + alias4(((helper = (helper = helpers.pdf_title || (depth0 != null ? depth0.pdf_title : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"pdf_title","hash":{},"data":data}) : helper)))
-    + "</td>\r\n								<td class = \"ebulletin_side_content_filename\">"
+    + "\r\n							\r\n								</td>\r\n								<td class = \"ebulletin_side_content_filename\">"
     + alias4(((helper = (helper = helpers.Files || (depth0 != null ? depth0.Files : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"Files","hash":{},"data":data}) : helper)))
     + "</td>\r\n							</tr>\r\n";
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1;
 
-  return "<table style=\"width:100%\">\r\n					<tr>\r\n						<th>Title</th>\r\n						<th>File</th>\r\n					</tr>\r\n\r\n"
+  return "<table class=\"side_content_table\" width=\"100%\">\r\n					<tr>\r\n						<th>Title</th>\r\n						<th>File</th>\r\n					</tr>\r\n\r\n"
     + ((stack1 = helpers.each.call(depth0 != null ? depth0 : {},(depth0 != null ? depth0.pdf_post_data : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "\r\n\r\n				</table>";
 },"useData":true});
