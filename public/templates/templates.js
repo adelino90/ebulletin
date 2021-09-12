@@ -150,69 +150,85 @@ templates['edit_view_post'] = template({"1":function(container,depth0,helpers,pa
     + "											\r\n										</div>\r\n							</div>\r\n					</div>\r\n                \r\n				</div>	\r\n\r\n";
 },"useData":true});
 templates['home'] = template({"1":function(container,depth0,helpers,partials,data) {
+    var stack1, alias1=depth0 != null ? depth0 : {};
+
+  return "        <div id=\"myCarousel\" class=\"carousel slide\" data-ride=\"carousel\">\n          <!-- Indicators -->\n          <ol class=\"carousel-indicators\">\n"
+    + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.bulletin_data : depth0),{"name":"each","hash":{},"fn":container.program(2, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "          </ol>\n\n          <!-- Wrapper for slides -->\n          <div class=\"carousel-inner\" role=\"listbox\">\n\n"
+    + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.main_post_data : depth0),{"name":"each","hash":{},"fn":container.program(4, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "\n        \n          </div>\n\n          <!-- Left and right controls -->\n          <a class=\"left carousel-control\" href=\"#myCarousel\" role=\"button\" data-slide=\"prev\">\n            <span class=\"glyphicon glyphicon-chevron-left\" aria-hidden=\"true\"></span>\n            <span class=\"sr-only\">Previous</span>\n          </a>\n          <a class=\"right carousel-control\" href=\"#myCarousel\" role=\"button\" data-slide=\"next\">\n            <span class=\"glyphicon glyphicon-chevron-right\" aria-hidden=\"true\"></span>\n            <span class=\"sr-only\">Next</span>\n          </a>\n        </div>\n      \n\n  </div>\n";
+},"2":function(container,depth0,helpers,partials,data) {
     var helper;
 
-  return "        <li data-target=\"#myCarousel\" data-slide-to=\""
+  return "              <li data-target=\"#myCarousel\" data-slide-to=\""
     + container.escapeExpression(((helper = (helper = helpers.index || (data && data.index)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : {},{"name":"index","hash":{},"data":data}) : helper)))
     + "\"></li>\n";
-},"3":function(container,depth0,helpers,partials,data) {
+},"4":function(container,depth0,helpers,partials,data) {
     var stack1, helper, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
 
-  return "                <div class=\"item "
-    + ((stack1 = (helpers.ifCond || (depth0 && depth0.ifCond) || alias2).call(alias1,(data && data.index),0,{"name":"ifCond","hash":{},"fn":container.program(4, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "\">\n                  <img src=\"../upload/"
+  return "                      <div class=\"item "
+    + ((stack1 = (helpers.ifCond || (depth0 && depth0.ifCond) || alias2).call(alias1,(data && data.index),0,{"name":"ifCond","hash":{},"fn":container.program(5, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "\">\n                        <img src=\"../upload/"
     + alias4(((helper = (helper = helpers.Files || (depth0 != null ? depth0.Files : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"Files","hash":{},"data":data}) : helper)))
     + "\" alt=\""
     + alias4(((helper = (helper = helpers.subject || (depth0 != null ? depth0.subject : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"subject","hash":{},"data":data}) : helper)))
-    + "\" width=\"760\" height=\"345\">\n                  <div class=\"carousel-caption\">\n                   <!--  <h3>"
+    + "\" width=\"760\" height=\"345\">\n                        <div class=\"carousel-caption\">\n                        <!--  <h3>"
     + alias4(((helper = (helper = helpers.subject || (depth0 != null ? depth0.subject : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"subject","hash":{},"data":data}) : helper)))
-    + "</h3>\n                    <p>"
+    + "</h3>\n                          <p>"
     + alias4(((helper = (helper = helpers.description || (depth0 != null ? depth0.description : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"description","hash":{},"data":data}) : helper)))
-    + "</p>-->\n                  </div>\n                </div>\n";
-},"4":function(container,depth0,helpers,partials,data) {
+    + "</p>-->\n                        </div>\n                      </div>\n";
+},"5":function(container,depth0,helpers,partials,data) {
     return "active";
+},"7":function(container,depth0,helpers,partials,data) {
+    return "    <div class = \"col-md-9\"></div>\n";
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    var stack1, alias1=depth0 != null ? depth0 : {};
+    var stack1;
 
-  return " <div class = \"col-md-9\">\n	 <div id=\"myCarousel\" class=\"carousel slide\" data-ride=\"carousel\">\n    <!-- Indicators -->\n    <ol class=\"carousel-indicators\">\n"
-    + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.bulletin_data : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "    </ol>\n\n    <!-- Wrapper for slides -->\n    <div class=\"carousel-inner\" role=\"listbox\">\n\n"
-    + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.main_post_data : depth0),{"name":"each","hash":{},"fn":container.program(3, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "\n  \n    </div>\n\n    <!-- Left and right controls -->\n    <a class=\"left carousel-control\" href=\"#myCarousel\" role=\"button\" data-slide=\"prev\">\n      <span class=\"glyphicon glyphicon-chevron-left\" aria-hidden=\"true\"></span>\n      <span class=\"sr-only\">Previous</span>\n    </a>\n    <a class=\"right carousel-control\" href=\"#myCarousel\" role=\"button\" data-slide=\"next\">\n      <span class=\"glyphicon glyphicon-chevron-right\" aria-hidden=\"true\"></span>\n      <span class=\"sr-only\">Next</span>\n    </a>\n  </div>\n      \n\n        </div>\n \n  <div class = \"col-md-3\">\n		<h1>Home</h1>\n		\n \n    <label> Welcome To Home<br>\n \n      \n\n        </div>\n ";
+  return " <div class = \"col-md-9\">\n"
+    + ((stack1 = helpers["if"].call(depth0 != null ? depth0 : {},(depth0 != null ? depth0.main_post_data : depth0),{"name":"if","hash":{},"fn":container.program(1, data, 0),"inverse":container.program(7, data, 0),"data":data})) != null ? stack1 : "")
+    + "  <div class = \"col-md-3\">\n		<h1>Home</h1>\n      <label> Welcome To Home<br>\n \n      \n\n  </div>\n ";
 },"useData":true});
 templates['image_popup'] = template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     return "				<div class=\"image-modal-popup\">\r\n					<div class=\"wrapper\">\r\n					<span id=\"close\">&times;</span>\r\n					<img id=\"image_modal_show\" src=\"\" alt=\"Image Modal\">\r\n					<div class=\"description\">\r\n						<h1></h1>\r\n					\r\n					</div>\r\n					</div>\r\n				</div>";
 },"useData":true});
 templates['index'] = template({"1":function(container,depth0,helpers,partials,data) {
+    var stack1, alias1=depth0 != null ? depth0 : {};
+
+  return "        <div id=\"myCarousel\" class=\"carousel slide\" data-ride=\"carousel\">\r\n          <!-- Indicators -->\r\n          <ol class=\"carousel-indicators\">\r\n"
+    + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.bulletin_data : depth0),{"name":"each","hash":{},"fn":container.program(2, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "          </ol>\r\n\r\n          <!-- Wrapper for slides -->\r\n          <div class=\"carousel-inner\" role=\"listbox\">\r\n\r\n"
+    + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.main_post_data : depth0),{"name":"each","hash":{},"fn":container.program(4, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "\r\n        \r\n          </div>\r\n\r\n          <!-- Left and right controls -->\r\n          <a class=\"left carousel-control\" href=\"#myCarousel\" role=\"button\" data-slide=\"prev\">\r\n            <span class=\"glyphicon glyphicon-chevron-left\" aria-hidden=\"true\"></span>\r\n            <span class=\"sr-only\">Previous</span>\r\n          </a>\r\n          <a class=\"right carousel-control\" href=\"#myCarousel\" role=\"button\" data-slide=\"next\">\r\n            <span class=\"glyphicon glyphicon-chevron-right\" aria-hidden=\"true\"></span>\r\n            <span class=\"sr-only\">Next</span>\r\n          </a>\r\n        </div>\r\n      \r\n\r\n  </div>\r\n";
+},"2":function(container,depth0,helpers,partials,data) {
     var helper;
 
-  return "        <li data-target=\"#myCarousel\" data-slide-to=\""
+  return "              <li data-target=\"#myCarousel\" data-slide-to=\""
     + container.escapeExpression(((helper = (helper = helpers.index || (data && data.index)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : {},{"name":"index","hash":{},"data":data}) : helper)))
     + "\"></li>\r\n";
-},"3":function(container,depth0,helpers,partials,data) {
+},"4":function(container,depth0,helpers,partials,data) {
     var stack1, helper, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
 
-  return "                <div class=\"item "
-    + ((stack1 = (helpers.ifCond || (depth0 && depth0.ifCond) || alias2).call(alias1,(data && data.index),0,{"name":"ifCond","hash":{},"fn":container.program(4, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "\">\r\n                  <img src=\"../upload/"
+  return "                      <div class=\"item "
+    + ((stack1 = (helpers.ifCond || (depth0 && depth0.ifCond) || alias2).call(alias1,(data && data.index),0,{"name":"ifCond","hash":{},"fn":container.program(5, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "\">\r\n                        <img src=\"../upload/"
     + alias4(((helper = (helper = helpers.Files || (depth0 != null ? depth0.Files : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"Files","hash":{},"data":data}) : helper)))
     + "\" alt=\""
     + alias4(((helper = (helper = helpers.subject || (depth0 != null ? depth0.subject : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"subject","hash":{},"data":data}) : helper)))
-    + "\" width=\"760\" height=\"345\">\r\n                  <div class=\"carousel-caption\">\r\n                   <!--  <h3>"
+    + "\" width=\"760\" height=\"345\">\r\n                        <div class=\"carousel-caption\">\r\n                        <!--  <h3>"
     + alias4(((helper = (helper = helpers.subject || (depth0 != null ? depth0.subject : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"subject","hash":{},"data":data}) : helper)))
-    + "</h3>\r\n                    <p>"
+    + "</h3>\r\n                          <p>"
     + alias4(((helper = (helper = helpers.description || (depth0 != null ? depth0.description : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"description","hash":{},"data":data}) : helper)))
-    + "</p>-->\r\n                  </div>\r\n                </div>\r\n";
-},"4":function(container,depth0,helpers,partials,data) {
+    + "</p>-->\r\n                        </div>\r\n                      </div>\r\n";
+},"5":function(container,depth0,helpers,partials,data) {
     return "active";
+},"7":function(container,depth0,helpers,partials,data) {
+    return "    <div class = \"col-md-9\"></div>\r\n";
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    var stack1, alias1=depth0 != null ? depth0 : {};
+    var stack1;
 
-  return " <div class = \"col-md-9\">\r\n	 <div id=\"myCarousel\" class=\"carousel slide\" data-ride=\"carousel\">\r\n    <!-- Indicators -->\r\n    <ol class=\"carousel-indicators\">\r\n"
-    + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.bulletin_data : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "    </ol>\r\n\r\n    <!-- Wrapper for slides -->\r\n    <div class=\"carousel-inner\" role=\"listbox\">\r\n\r\n"
-    + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.main_post_data : depth0),{"name":"each","hash":{},"fn":container.program(3, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "\r\n  \r\n    </div>\r\n\r\n    <!-- Left and right controls -->\r\n    <a class=\"left carousel-control\" href=\"#myCarousel\" role=\"button\" data-slide=\"prev\">\r\n      <span class=\"glyphicon glyphicon-chevron-left\" aria-hidden=\"true\"></span>\r\n      <span class=\"sr-only\">Previous</span>\r\n    </a>\r\n    <a class=\"right carousel-control\" href=\"#myCarousel\" role=\"button\" data-slide=\"next\">\r\n      <span class=\"glyphicon glyphicon-chevron-right\" aria-hidden=\"true\"></span>\r\n      <span class=\"sr-only\">Next</span>\r\n    </a>\r\n  </div>\r\n      \r\n\r\n        </div>\r\n \r\n  <div class = \"col-md-3\">\r\n		<h1>Home</h1>\r\n		\r\n \r\n    <label> Welcome To Home<br>\r\n \r\n      \r\n\r\n        </div>\r\n ";
+  return " <div class = \"col-md-9\">\r\n"
+    + ((stack1 = helpers["if"].call(depth0 != null ? depth0 : {},(depth0 != null ? depth0.main_post_data : depth0),{"name":"if","hash":{},"fn":container.program(1, data, 0),"inverse":container.program(7, data, 0),"data":data})) != null ? stack1 : "")
+    + "  <div class = \"col-md-3\">\r\n		<h1>Home</h1>\r\n      <label> Welcome To Home<br>\r\n \r\n      \r\n\r\n  </div>\r\n ";
 },"useData":true});
 templates['loader'] = template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     return "  <div style=\"display: none;\" class=\"pop-up-container loader\">\r\n        <img src=\"../images/1488.gif\">\r\n            \r\n        </div>";
@@ -403,7 +419,7 @@ templates['users'] = template({"1":function(container,depth0,helpers,partials,da
     + "												<!-- data -->\n									</tbody>\n								  </table>\n								</div>\n							</div>\n						</div>\n					</div>\n				</div>\n\n		";
 },"useData":true});
 templates['user_menu_page'] = template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    return "\r\n\r\n\r\n<div class=\"container\">\r\n  <div class=\"row\">\r\n      <div class=\"col-md-6\">\r\n        <div id=\"main_post\" class=\"main_post_menu\">\r\n          <h2>Main Post</h2>\r\n        </div>\r\n      </div>\r\n       <div class=\"col-md-6\">\r\n         <div id=\"pdf_post\" class=\"main_post_menu\">\r\n            <h2>PDF Post</h2>\r\n          </div>\r\n       </div>\r\n    \r\n  </div>\r\n</div>";
+    return "\r\n\r\n\r\n<div class=\"container\">\r\n  <div class=\"row\">\r\n      <div class=\"col-md-5\">\r\n        <div id=\"main_post\" class=\"main_post_menu\">\r\n          <h2>Main Post</h2>\r\n        </div>\r\n      </div>\r\n       <div class=\"col-md-5\">\r\n         <div id=\"pdf_post\" class=\"main_post_menu\">\r\n            <h2>PDF Post</h2>\r\n          </div>\r\n       </div>\r\n    \r\n  </div>\r\n</div>";
 },"useData":true});
 templates['user_post_data'] = template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var helper, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
