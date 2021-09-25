@@ -366,7 +366,7 @@ showpopups=(function () {
 			$image_modal_popup:$('body').find('.image-modal-popup'),
 			$image_modal_show:$('body').find('#image_modal_show'),
 			$description:$('body').find('.description'),
-			$image_modal_popup:$('body').find('#close, .image-modal-popup')
+			$image_modal_popup:$('body').find('.image-modal-popup')
 		}
 	
 		$('body').css('overflow','auto')
