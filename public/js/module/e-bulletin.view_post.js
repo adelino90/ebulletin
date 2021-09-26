@@ -65,7 +65,7 @@ setcontent = function(id){
 			jqueryMap.$date_to.datepicker({});
 			jqueryMap.$approve.click(approve_post);
 			jqueryMap.$Reject.click(function(){
-				configMap.change_option_anchor('admin_manage_main_posts',configMap.previous_page_id,( ( new Date() ).getSeconds() + 10000 ).toString( 36 ))
+				configMap.change_option_anchor('admin_manage_main_posts',configMap.previous_page_id,( ( new Date() ).getSeconds() + 10000 ).toString( 36 )+"INIT")
 			})
 			jqueryMap.$img_post_image.click(
 				function(e){

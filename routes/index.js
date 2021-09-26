@@ -379,8 +379,9 @@ app.get('/file', function(req,res){
 app.post('/manage_posts', function(req,res){
 	var return_object={}
 	var user_id = req.session.user_ID;
+	var search = req.body.search_char ? req.body.search_char:""
 	page_number=req.body.page_number;
-	 model.get_admin_dashboard(user_id,page_number,function(ret,pagecount){
+	 model.get_admin_dashboard(user_id,page_number,search,function(ret,pagecount){
 		return_object.dashboard_data=ret;
 		return_object.pagecount=pagecount
 		 res.send(return_object);

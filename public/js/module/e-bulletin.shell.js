@@ -167,7 +167,6 @@ admin_authorize = function(fn){
 //
 onHashchange = function ( event ) {
 	var
-	_s_chat_previous, _s_chat_proposed, s_chat_proposed,
 	anchor_map_proposed,_s_b_previous, _s_b_proposed,
 	is_ok = true,s_option_proposed,
 	anchor_map_previous = copyAnchorMap();
@@ -182,21 +181,18 @@ onHashchange = function ( event ) {
 	if (! anchor_map_previous || _s_b_previous !== _s_b_proposed )
 	{
 			s_option_proposed = anchor_map_proposed.option;
+			console.log(anchor_map_proposed._option.id2)
 		switch(s_option_proposed){
 			case "manage_posts":
-				//ebulletin.post_request.initModule( jqueryMap.$content,anchor_map_proposed._option.id,anchor_map_proposed._option.id2 );
 				ebulletin.user_menu.initModule( jqueryMap.$content,jqueryMap.$side_content);
 			break;
 			case "admin_manage_main_posts":
 				ebulletin.post_request.initModule( jqueryMap.$content,anchor_map_proposed._option.id,anchor_map_proposed._option.id2 );
-				//ebulletin.user_menu.initModule( jqueryMap.$content,jqueryMap.$side_content);
 			break;
 			case "pdf_post_request":
 				ebulletin.pdf_post_request.initModule( jqueryMap.$content,anchor_map_proposed._option.id,anchor_map_proposed._option.id2 );
-				//ebulletin.user_menu.initModule( jqueryMap.$content,jqueryMap.$side_content);
 			break;
 			case "dashboard":
-				//ebulletin.dashboard.initModule( jqueryMap.$content,anchor_map_proposed._option.id);
 				ebulletin.user_menu.initModule( jqueryMap.$content,jqueryMap.$side_content);
 			break;
 			case "pdf_post":
@@ -254,32 +250,6 @@ onHashchange = function ( event ) {
 	
 	stateMap.anchor_map = anchor_map_proposed;
 	// convenience vars
-	_s_chat_previous = anchor_map_previous._s_chat;
-	_s_chat_proposed = anchor_map_proposed._s_chat;
-	// Begin adjust chat component if changed
-	//console.log(anchor_map_previous);
-	if ( ! anchor_map_previous
-	|| _s_chat_previous !== _s_chat_proposed
-	) 
-	 {
-		s_chat_proposed = anchor_map_proposed.chat;
-		
-		switch ( s_chat_proposed ) {
-			case 'opened' :
-				is_ok = spa.chat.setSliderPosition( 'opened' );
-			break;
-			case 'closed' :
-				is_ok = spa.chat.setSliderPosition( 'closed' );
-			break;
-			case 'hidden' :
-				is_ok = spa.chat.setSliderPosition( 'hidden' );
-			break;
-			default :
-				spa.chat.setSliderPosition( 'closed' );
-				delete anchor_map_proposed.chat;
-				$.uriAnchor.setAnchor( anchor_map_proposed, null, true );
-		}
-	  }
 // End adjust chat component if changed
 // Begin revert anchor if slider change denied
 	if ( ! is_ok ){
@@ -314,7 +284,7 @@ onHashchange = function ( event ) {
 // Throws : none
 //
 
-setOptionAnchor = function ( option, id, id2 ) {
+setOptionAnchor = function ( option, id, id2,id3) {
   return changeAnchorPart({ option : option, _option : { id : id, id2 : id2 } });
 };
 
@@ -398,7 +368,7 @@ showpopups=(function () {
 		$container.append(Handlebars.templates.popup());
 		$container.append(Handlebars.templates.pdf_popup());
 	}
-	message_popup=function(message,type,proceedto,activepage){
+	message_popup=function(message,type,proceedto,activepage,activesearch){
 		var $message_popup_components={}
 		$message_popup_components={
 			$message:$('body').find(".modal__text"),

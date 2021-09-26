@@ -54,7 +54,7 @@ setcontent = function(usertype){
             if(usertype==2)
                 configMap.change_option_anchor('main_post',"ebulletin",( ( new Date() ).getSeconds() + 10000 ).toString( 36 ))	
             else if(usertype==1)
-                configMap.change_option_anchor('admin_manage_main_posts',"ebulletin",( ( new Date() ).getSeconds() + 10000 ).toString( 36 ))	
+                configMap.change_option_anchor('admin_manage_main_posts',"ebulletin",( ( new Date() ).getSeconds() + 10000 ).toString( 36 )+"INIT")	
                
         })
         jqueryMap.$pdf_post.click(function(){

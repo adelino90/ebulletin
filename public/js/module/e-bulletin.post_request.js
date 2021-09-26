@@ -4,7 +4,7 @@ ebulletin.post_request = (function () {
 var
 configMap = {
 	
-	
+	active_search_char:"",
 	dashboard_model:null,
 	admin_user:null,
 	change_option_anchor:null,	
@@ -13,7 +13,7 @@ configMap = {
 },
 stateMap = {$container : undefined, anchor_map : {} ,resize_idto : undefined },
 jqueryMap = {},
-copyAnchorMap,setJqueryMap,configModule,setcontent,change_page,helper,viewclicked,initModule;
+copyAnchorMap,search_post_request,initialize_event_components,setJqueryMap,configModule,setcontent,change_page,helper,viewclicked,initModule;
 
 // Begin DOM method /setJqueryMap/
 setJqueryMap = function () {
@@ -29,6 +29,8 @@ setJqueryMap = function () {
 					$edit_button : $container.find('.ebulletin-dashboard-edit'),
 					$delete_button : $container.find('.ebulletin-dashboard-delete'),
 					$view_button : $container.find('.ebulletin-post_request-view'),
+					$ebulletin_post_request_search_box:$container.find('#ebulletin_post_request_search_box'),
+					$ebulletin_post_request_search_submit:$container.find('#ebulletin_post_request_search_submit'),
 					$pagination:$container.find('.pagination-wrapper'),
 					$pagination_page:$container.find('.page-numbers')
 				}
@@ -104,26 +106,44 @@ viewclicked = function(){
 	var post_id = $(this).parent().attr('data-id');
 	configMap.change_option_anchor('view_post',post_id,configMap.activepage);
 }
+search_post_request=function(){
+	var search_char=jqueryMap.$ebulletin_post_request_search_box.val();
+	configMap.change_option_anchor('admin_manage_main_posts',1,search_char)
+}
 
 change_page =function(e){
-
+var search_char = jqueryMap.$ebulletin_post_request_search_box.val()
 	if(parseInt($(this).attr("data-id"))){
 		var setpageto = $(this).attr("data-id")
-		configMap.change_option_anchor('admin_manage_main_posts',setpageto,( ( new Date() ).getSeconds() + 10000 ).toString( 36 ))
+		configMap.change_option_anchor('admin_manage_main_posts',setpageto,search_char)
 	}
 	else if($(this).attr("data-id")=="next"){
 		configMap.activepage=parseInt(configMap.activepage)+1;
-		configMap.change_option_anchor('admin_manage_main_posts',configMap.activepage,( ( new Date() ).getSeconds() + 10000 ).toString( 36 ))
+		configMap.change_option_anchor('admin_manage_main_posts',configMap.activepage,search_char)
 	}
 	else if($(this).attr("data-id")=="prev"){
 		configMap.activepage=parseInt(configMap.activepage)-1;
-		configMap.change_option_anchor('admin_manage_main_posts',configMap.activepage,( ( new Date() ).getSeconds() + 10000 ).toString( 36 ))
+		configMap.change_option_anchor('admin_manage_main_posts',configMap.activepage,search_char)
 	}
+
 }
-setcontent = function(pagenumber){
+initialize_event_components= function(page_number,search_char){
+		configMap.activepage=page_number;
+			jqueryMap.$pagination_page.click(change_page);
+			jqueryMap.$view_button.click(viewclicked);
+			configMap.active_search_char = search_char;
+			
+			if(!search_char.includes("INIT"))
+				jqueryMap.$ebulletin_post_request_search_box.val(search_char)
+
+			jqueryMap.$ebulletin_post_request_search_submit.click(search_post_request);
+
+}
+setcontent = function(pagenumber,search_char){
 	var page_current = (pagenumber=="ebulletin")?1:pagenumber;
 	var pagination_data={}
 	pagination_data.page_number=page_current;
+	pagination_data.search_char=search_char.includes("INIT") ? "" : search_char;
 		helper();
 
 		configMap.dashboard_model.get_admin_post(pagination_data,function(response){
@@ -131,9 +151,7 @@ setcontent = function(pagenumber){
 			stateMap.$container.html(Handlebars.templates.post_request(data));
 			stateMap.$container.append(Handlebars.templates.pagination({currentPage:parseInt(page_current),pageCount:response.pagecount,size:10}))
 			setJqueryMap();
-			configMap.activepage=page_current;
-			jqueryMap.$pagination_page.click(change_page);
-			jqueryMap.$view_button.click(viewclicked);
+			initialize_event_components(page_current,search_char);
 			
 		})
 		
@@ -141,8 +159,8 @@ setcontent = function(pagenumber){
 
 
 
-initModule = function ( $container,id1,id2 ) {
-	
+initModule = function ( $container,id1,search_char ) {
+
 	stateMap.$container = $container;
 	stateMap.$container.off().empty();
 	configMap.admin_user(function(response){
@@ -151,7 +169,7 @@ initModule = function ( $container,id1,id2 ) {
 		}
 		else{
 			
-			setcontent(id1);
+			setcontent(id1,search_char);
 		}
 		
 	})
