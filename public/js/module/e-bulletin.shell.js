@@ -386,7 +386,7 @@ showpopups=(function () {
 				$message_popup_components.$confirm.click(function(){
 				$message_popup_components.$pop_up_container.fadeOut("slow")
 				if(proceedto)
-					setOptionAnchor(proceedto,activepage,( ( new Date() ).getSeconds() + 10000 ).toString( 36 ))
+					setOptionAnchor(proceedto,activepage,( ( new Date() ).getSeconds() + 10000 ).toString( 36 )+"INIT")
 				})
 			break;
 		}
