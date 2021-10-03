@@ -61,7 +61,7 @@ setcontent = function(usertype){
             if(usertype==2)
                 configMap.change_option_anchor('pdf_post',"ebulletin",( ( new Date() ).getSeconds() + 10000 ).toString( 36 ))
             else if(usertype==1)
-            configMap.change_option_anchor('pdf_post_request',"ebulletin",( ( new Date() ).getSeconds() + 10000 ).toString( 36 ))
+            configMap.change_option_anchor('pdf_post_request',"ebulletin",( ( new Date() ).getSeconds() + 10000 ).toString( 36 )+"INIT")
        
         })
 

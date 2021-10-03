@@ -240,11 +240,42 @@ get_admin_dashboard = function(id,page_number,search,callback){
 	  const request2 = new sql.Request(gpool)
 	  request2.input('input_parameter', sql.NVarChar, search)
 	  request2.query("SELECT count(*) as pagecount FROM post_tbl where title like @input_parameter", (err, result2) => {
-		  console.log(result2)
-	  	request1.input('user_id', sql.Int, id)
-		  request1.input('page_number', sql.Int, page_number)
-		  request1.input('search', sql.NVarChar, search)
-		request1.execute('admin_post_view', (err, result1) => {
+			request1.input('user_id', sql.Int, id)
+		  	request1.input('page_number', sql.Int, page_number)
+		  	request1.input('search', sql.NVarChar, search)
+			request1.execute('admin_post_view', (err, result1) => {
+				var totalpage=0;
+				if(result2.recordset[0].pagecount%10!=0&&result2.recordset[0].pagecount>10){
+					totalpage=parseInt((result2.recordset[0].pagecount/10)+1);
+				}
+				if(result2.recordset[0].pagecount<=10){
+					totalpage=0;
+				}
+				if(result2.recordset[0].pagecount%10==0){
+					totalpage=result2.recordset[0].pagecount/10;
+				}
+				
+
+		
+						callback(result1.recordset,totalpage);
+					// ... 
+					})
+	})
+
+}
+
+
+get_admin_pdf_dashboard = function(id,page_number,search,callback){
+	sql.close();
+	search='%'+search+'%'
+	const request1 = new sql.Request(gpool)
+	const request2 = new sql.Request(gpool)
+	request2.input('input_parameter', sql.NVarChar, search)
+	request2.query('SELECT count(*) as pagecount FROM pdf_tbl where pdf_title like @input_parameter', (err, result2) => {
+		request1.input('user_id', sql.Int, id)
+		request1.input('page_number', sql.Int, page_number)
+		request1.input('search', sql.NVarChar, search)
+		request1.execute('admin_pdf_post_view', (err, result1) => {
 			var totalpage=0;
 			if(result2.recordset[0].pagecount%10!=0&&result2.recordset[0].pagecount>10){
 				totalpage=parseInt((result2.recordset[0].pagecount/10)+1);
@@ -255,43 +286,9 @@ get_admin_dashboard = function(id,page_number,search,callback){
 			if(result2.recordset[0].pagecount%10==0){
 				totalpage=result2.recordset[0].pagecount/10;
 			}
-			console.log(totalpage)
-
-	
 					callback(result1.recordset,totalpage);
 				// ... 
-				})
-		})
-
-}
-
-
-get_admin_pdf_dashboard = function(id,page_number,callback){
-	sql.close();
-	const request1 = new sql.Request(gpool)
-	const request2 = new sql.Request(gpool)
-	request2.input('table', sql.NVarChar, 'pdf_tbl')
-	request2.execute('get_admin_page_count', (err, result2) => {
-		
-		request1.input('user_id', sql.Int, id)
-		request1.input('page_number', sql.Int, page_number)
-	  request1.execute('admin_pdf_post_view', (err, result1) => {
-		  var totalpage=0;
-		  if(result2.recordset[0].pagecount%10!=0&&result2.recordset[0].pagecount>10){
-			  totalpage=parseInt((result2.recordset[0].pagecount/10)+1);
-		  }
-		  if(result2.recordset[0].pagecount<=10){
-			  totalpage=0;
-		  }
-		  if(result2.recordset[0].pagecount%10==0){
-			  totalpage=result2.recordset[0].pagecount/10;
-		  }
-	
-
-  
-				  callback(result1.recordset,totalpage);
-			  // ... 
-			  })
+			})
 	  })
 
 }
